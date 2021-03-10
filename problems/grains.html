@@ -1,0 +1,36 @@
+
+        <html>
+        <head>
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Grains</h2>
+            <p>Solutions to grains in various languages.</p>
+            <ul>
+              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#elm">Elm</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module Grains exposing (square)
+
+
+square : Int -> Maybe Int
+square n =
+    if n <= 0 then
+        Nothing
+
+    else
+        Just (2 ^ (n - 1))
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        </html>
+        

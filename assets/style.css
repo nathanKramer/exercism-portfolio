@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #2d2d2d;
+}
+
+a:link,
+a:visited {
+  color: #5d5d5d;
+}
+
+a:hover {
+  color: #4d4dee;
+}
+
+div.side-bar {
+  width: 300px;
+  position: fixed;
+}
+
+div.main {
+  margin-left: 300px;
+}

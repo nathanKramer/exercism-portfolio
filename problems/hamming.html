@@ -1,0 +1,56 @@
+
+        <html>
+        <head>
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Hamming</h2>
+            <p>Solutions to hamming in various languages.</p>
+            <ul>
+              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#ocaml">Ocaml</a></li><li><a href="#elm">Elm</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="ocaml">Ocaml</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/ocaml.html">Other Ocaml solutions.</a>
+            <pre><code class="language-ocaml">open Base
+
+type nucleotide = A | C | G | T
+
+let hamming_distance a b =
+  match List.zip a b with
+  | [] -> 0
+  | [ ([ (x :: xs) ] :: rest) ] -> 1 + hamming_distance rest
+</code></pre>
+        
+
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module Hamming exposing (distance)
+
+
+distance : String -> String -> Result String Int
+distance left right =
+    if String.length left == String.length right then
+        Ok <| calculateDistance left right
+
+    else
+        Err "left and right strands must be of equal length"
+
+
+calculateDistance : String -> String -> Int
+calculateDistance left right =
+    List.map2 Tuple.pair (String.toList left) (String.toList right)
+        |> List.filter (\( a, b ) -> a /= b)
+        |> List.length
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        </html>
+        

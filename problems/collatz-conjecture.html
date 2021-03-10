@@ -1,0 +1,92 @@
+
+        <html>
+        <head>
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Collatz Conjecture</h2>
+            <p>Solutions to collatz-conjecture in various languages.</p>
+            <ul>
+              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#clojure">Clojure</a></li><li><a href="#elm">Elm</a></li><li><a href="#haskell">Haskell</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="clojure">Clojure</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/clojure.html">Other Clojure solutions.</a>
+            <pre><code class="language-clojure">(ns collatz-conjecture)
+
+(defn- next-collatz-num [num]
+  (if
+   (even? num)
+    (/ num 2)
+    (+ 1 (* num 3))))
+
+(defn- collatz-support [step-count num]
+  (cond
+    (= num 1) step-count
+    :else (let [next-num (next-collatz-num num)]
+            (collatz-support (+ 1 step-count) next-num))))
+
+(defn collatz [num]
+  {:pre [(< 0 num)]}
+  (collatz-support 0 num))
+</code></pre>
+        
+
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module CollatzConjecture exposing (collatz)
+
+
+countCollatzSteps : Int -> Int -> Int
+countCollatzSteps steps n =
+    let
+        val =
+            if modBy 2 n == 0 then
+                n // 2
+
+            else
+                (3 * n) + 1
+    in
+    if n == 1 then
+        steps
+
+    else
+        countCollatzSteps (steps + 1) val
+
+
+collatz : Int -> Result String Int
+collatz start =
+    if start <= 0 then
+        Result.Err "Only positive numbers are allowed"
+
+    else
+        Result.Ok <| countCollatzSteps 0 start
+</code></pre>
+        
+
+            <h3><a name="haskell">Haskell</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/haskell.html">Other Haskell solutions.</a>
+            <pre><code class="language-haskell">module CollatzConjecture (collatz) where
+
+collatz' :: Integer -> Integer
+collatz' 1 = 0
+collatz' n =
+  let next = if even n then quot n 2 else 3 * n + 1
+   in succ $ collatz' next
+
+collatz :: Integer -> Maybe Integer
+collatz n
+  | n <= 0 = Nothing
+  | otherwise = Just $ collatz' n
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        </html>
+        

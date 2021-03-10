@@ -1,0 +1,61 @@
+
+        <html>
+        <head>
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Rust</h2>
+            <p>Problems solved in rust.</p>
+            <ul>
+              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#hello-world">Hello World</a></li><li><a href="#leap">Leap</a></li><li><a href="#nth-prime">Nth Prime</a></li><li><a href="#raindrops">Raindrops</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="hello-world">Hello World</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <pre><code class="language-rust">// The &'static here means the return type has a static lifetime.
+// This is a Rust feature that you don't need to worry about now.
+pub fn hello() -> &'static str {
+    "Hello, World!"
+}
+</code></pre>
+        
+
+            <h3><a name="leap">Leap</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/leap.html">Other "Leap" solutions.</a>
+            <pre><code class="language-rust">pub fn is_leap_year(year: u64) -> bool {
+    return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
+}
+</code></pre>
+        
+
+            <h3><a name="nth-prime">Nth Prime</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/nth-prime.html">Other "Nth Prime" solutions.</a>
+            <pre><code class="language-rust">pub fn nth(n: u32) -> u32 {
+    unimplemented!("What is the 0-indexed {}th prime number?", n)
+}
+</code></pre>
+        
+
+            <h3><a name="raindrops">Raindrops</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/raindrops.html">Other "Raindrops" solutions.</a>
+            <pre><code class="language-rust">pub fn raindrops(n: u32) -> String {
+    let rain = [(3, "Pling"), (5, "Plang"), (7, "Plong")]
+        .into_iter()
+        .filter(|&(number, _)| n % number == 0)
+        .map(|&(_, sound)| sound)
+        .collect::<Vec<&str>>()
+        .join("");
+    return if rain.is_empty() { n.to_string() } else { rain };
+}
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        </html>
+        

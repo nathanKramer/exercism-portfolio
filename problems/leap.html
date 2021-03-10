@@ -1,0 +1,72 @@
+
+        <html>
+        <head>
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
+            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Leap</h2>
+            <p>Solutions to leap in various languages.</p>
+            <ul>
+              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#ocaml">Ocaml</a></li><li><a href="#nim">Nim</a></li><li><a href="#rust">Rust</a></li><li><a href="#haskell">Haskell</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="ocaml">Ocaml</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/ocaml.html">Other Ocaml solutions.</a>
+            <pre><code class="language-ocaml">let leap_year year = 
+    year mod 4 = 0 && 
+        (year mod 100 <> 0 || year mod 400 = 0)
+</code></pre>
+        
+
+            <h3><a name="nim">Nim</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/nim.html">Other Nim solutions.</a>
+            <pre><code class="language-nim">func isLeapYear*(year: int): bool =
+  year mod 4 == 0 and (
+    year mod 100 != 0 or year mod 400 == 0
+  )
+</code></pre>
+        
+
+            <h3><a name="rust">Rust</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/rust.html">Other Rust solutions.</a>
+            <pre><code class="language-rust">pub fn is_leap_year(year: u64) -> bool {
+    return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
+}
+</code></pre>
+        
+
+            <h3><a name="haskell">Haskell</a></h3>
+            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/haskell.html">Other Haskell solutions.</a>
+            <pre><code class="language-haskell">module LeapYear
+  ( isLeapYear
+  ) where
+
+bind :: (b -> b -> b) -> (a -> b) -> (a -> b) -> a -> b
+bind f a b x = f (a x) (b x)
+
+infixl 5 &&$
+
+(&&$) :: (a -> Bool) -> (a -> Bool) -> a -> Bool
+(&&$) = bind (&&)
+
+infixl 5 ||$
+
+(||$) :: (a -> Bool) -> (a -> Bool) -> a -> Bool
+(||$) = bind (||)
+
+isLeapYear :: Integer -> Bool
+isLeapYear = isDivisibleBy 400 ||$ (isDivisibleBy 4 &&$ not . isDivisibleBy 100)
+  where
+    isDivisibleBy = (\divisor x -> mod x divisor == 0)
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        </html>
+        

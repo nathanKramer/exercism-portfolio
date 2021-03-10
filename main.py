@@ -107,7 +107,7 @@ def resolveSolution(rootDir, problem, metadata):
     ]
     for attempt in attempts:
         file = attempt and solution_file_name(attempt)
-        if file is not None and not os.path.isfile(file):
+        if file is None or not os.path.isfile(file):
             continue
         return file
     return None

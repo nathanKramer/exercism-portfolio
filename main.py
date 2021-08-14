@@ -216,11 +216,13 @@ def renderIndexPage(root, portfolio):
         </head>
         <body>
             <h2>Exercism Portfolio</h2>
-            <p>Here you can browse my exercism portfolio.</p>
-            <ul>{"".join([ f'<li><a href="{root}/languages/{language}.html">{titlize(language)}</a></li>' for language in portfolio['languages'].keys()])}</ul>
             <h3>About</h3>
             <p>The code here is pulled straight from my <a href="https://exercism.io/profiles/nathanKramer">exercism.io profile</a>.</p>
             <p>I use exercism.io for learning purposes, so while all code here is authored by me, I do often learn from the solutions of others.</p>
+            <h3>Languages</h3>
+            <ul>{"".join([ f'<li><a href="{root}/languages/{language}.html">{titlize(language)}</a></li>' for language in portfolio['languages'].keys()])}</ul>
+            <h3>Problems</h3>
+            <ul>{"".join([ f'<li><a href="{root}/problems/{problem}.html">{titlize(problem)}</a></li>' for problem in portfolio['problems'].keys()])}</ul>
         </body>
         </html>
         """

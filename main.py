@@ -2,7 +2,7 @@
 import os
 import sys
 
-EXERCISM_DIR = '/Users/nathankramer/Projects/nathanKramer/exercism'
+EXERCISM_DIR = os.getenv('EXERCISM_DIR')
 
 LANGUAGE_METADATA = {
     'c': {
@@ -133,7 +133,7 @@ def titlize(kebab):
     return ' '.join([word.capitalize() for word in kebab.split('-')])
 
 
-def renderPage(rootDir, title, summary, items, solutions_markup):
+def renderPage(rootDir, title, summary, items, markup):
     return f"""
         <html>
         <head>
@@ -150,7 +150,7 @@ def renderPage(rootDir, title, summary, items, solutions_markup):
             <ul>{"".join([ f'<li><a href="#{item}">{titlize(item)}</a></li>' for item in items])}</ul>
             </div>
             <div class="main">
-            {solutions_markup}
+            {markup}
             </div>
         </body>
         <script src="{rootDir}/assets/prism.js"></script>

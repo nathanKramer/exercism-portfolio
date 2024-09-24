@@ -1,32 +1,66 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>All Your Base</h2>
             <p>Solutions to all-your-base in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#elm">Elm</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="elm">Elm</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elm.html">Other Elm solutions.</a>
+            <a href="/languages/elm.html">Other Elm solutions.</a>
             <pre><code class="language-elm">module AllYourBase exposing (rebase)
 
 
 rebase : Int -> List Int -> Int -> Maybe (List Int)
 rebase inBase digits outBase =
-    Debug.todo "Please implement this function"
+    let
+        invalid =
+            List.isEmpty digits
+                || (inBase < 2)
+                || (outBase < 2)
+                || List.any (\d -> d >= inBase || d < 0) digits
+                || List.all ((==) 0) digits
+
+        totalValue =
+            readBase inBase digits
+    in
+    if invalid then
+        Nothing
+
+    else
+        Just (convertBase outBase totalValue)
+
+
+readBase : Int -> List Int -> Int
+readBase base digits =
+    let
+        accumulate digit ( counter, acc ) =
+            ( counter + 1, acc + (digit * (base ^ counter)) )
+    in
+    List.foldr accumulate ( 0, 0 ) digits |> Tuple.second
+
+
+convertBase : Int -> Int -> List Int
+convertBase base value =
+    case value of
+        0 ->
+            []
+
+        _ ->
+            convertBase base (value // base) ++ [ remainderBy base value ]
 </code></pre>
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

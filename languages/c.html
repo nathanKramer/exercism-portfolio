@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>C</h2>
             <p>Problems solved in c.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#darts">Darts</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#linked-list">Linked List</a></li><li><a href="#resistor-color">Resistor Color</a></li><li><a href="#resistor-color-duo">Resistor Color Duo</a></li><li><a href="#resistor-color-trio">Resistor Color Trio</a></li></ul>
+            <ul><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#darts">Darts</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#resistor-color">Resistor Color</a></li><li><a href="#resistor-color-duo">Resistor Color Duo</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="armstrong-numbers">Armstrong Numbers</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
+            <a href="/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
             <pre><code class="language-c">#include "armstrong_numbers.h"
 #include <stdio.h>
 #include <math.h>
@@ -43,7 +43,7 @@ int is_armstrong_number(int candidate)
         
 
             <h3><a name="darts">Darts</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/darts.html">Other "Darts" solutions.</a>
+            <a href="/problems/darts.html">Other "Darts" solutions.</a>
             <pre><code class="language-c">#include "darts.h"
 #include <math.h>
 
@@ -71,7 +71,7 @@ uint8_t score(coordinate_t coord)
         
 
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-c">#include "hello_world.h"
 
 const char *hello(void)
@@ -81,33 +81,8 @@ const char *hello(void)
 </code></pre>
         
 
-            <h3><a name="linked-list">Linked List</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/linked-list.html">Other "Linked List" solutions.</a>
-            <pre><code class="language-c">#include "linked_list.h"
-
-typedef struct list_item
-{
-   struct list_item *next;
-   struct list_item *previous;
-   ll_data_t data;
-} list_item_t;
-
-list_item_t **new_list()
-{
-   list_item_t *list =
-       &(list_item_t){.next = 0, .previous = 0, .data = 0};
-   return list;
-}
-
-bool is_list_empty(struct list_item **list)
-{
-   return !(list && *list);
-}
-</code></pre>
-        
-
             <h3><a name="resistor-color">Resistor Color</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/resistor-color.html">Other "Resistor Color" solutions.</a>
+            <a href="/problems/resistor-color.html">Other "Resistor Color" solutions.</a>
             <pre><code class="language-c">#include "resistor_color.h"
 
 resistor_band_t *colors()
@@ -127,7 +102,7 @@ int color_code(resistor_band_t c)
         
 
             <h3><a name="resistor-color-duo">Resistor Color Duo</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/resistor-color-duo.html">Other "Resistor Color Duo" solutions.</a>
+            <a href="/problems/resistor-color-duo.html">Other "Resistor Color Duo" solutions.</a>
             <pre><code class="language-c">#include "resistor_color_duo.h"
 #include <stdio.h>
 #define MAX_DIGITS 2;
@@ -138,14 +113,8 @@ int color_code(resistor_band_t colors[])
 }
 </code></pre>
         
-
-            <h3><a name="resistor-color-trio">Resistor Color Trio</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/resistor-color-trio.html">Other "Resistor Color Trio" solutions.</a>
-            <pre><code class="language-c">#include "resistor_color_trio.h"
-</code></pre>
-        
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Say</h2>
             <p>Solutions to say in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#clojure">Clojure</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="clojure">Clojure</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/clojure.html">Other Clojure solutions.</a>
+            <a href="/languages/clojure.html">Other Clojure solutions.</a>
             <pre><code class="language-clojure">(ns say
   (:require [clojure.string :refer [join]]))
 
@@ -61,6 +61,10 @@
     (fn [[val _]] (> val num))
     magnitudes)))
 
+(next-magnitude 5234)
+;; => [1000 "thousand"]
+
+
 (defn- say-compound-word
   [num]
   (let [small (rem num 10)
@@ -80,7 +84,7 @@
                 filtered-components (filter
                                      not-empty
                                      components)]
-            (join " " filtered-components))))
+            (str (join " " filtered-components)))))
 
 
 ;;; EXPORTS
@@ -94,10 +98,25 @@
   (if (= num 0)
     "zero"
     (say num)))
+
+(number 0)
+(number 1035053)
+;; => Syntax error compiling at (say.clj:80:1).
+;;    Unable to resolve symbol: number in this context
+
+;; => "one million thirty-five thousand fifty-three"
+
+;; => "zero"
+
+;; => Syntax error compiling at (say.clj:79:1).
+;;    Unable to resolve symbol: number in this context
+(number 09238420394)
+;; => Syntax error reading source at (REPL:94:20).
+;;    Invalid number: 09238420394
 </code></pre>
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

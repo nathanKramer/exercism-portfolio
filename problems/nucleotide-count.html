@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Nucleotide Count</h2>
             <p>Solutions to nucleotide-count in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#elm">Elm</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="elm">Elm</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elm.html">Other Elm solutions.</a>
+            <a href="/languages/elm.html">Other Elm solutions.</a>
             <pre><code class="language-elm">module NucleotideCount exposing (nucleotideCounts)
 
 
@@ -46,42 +46,42 @@ aggregateGroups ( k, instances ) acc =
     in
     case k of
         'a' ->
-            { acc | a = acc.a }
+            { acc | a = acc.a + count }
 
         't' ->
-            { acc | t = acc.t }
+            { acc | t = acc.t + count }
 
         'c' ->
-            { acc | c = acc.c }
+            { acc | c = acc.c + count }
 
         'g' ->
-            { acc | g = acc.g }
+            { acc | g = acc.g + count }
 
         _ ->
             acc
 
 
 group : List a -> List ( a, List a )
-group list =
-    let
-        helper : List a -> List ( a, List a ) -> List ( a, List a )
-        helper scattered gathered =
-            case scattered of
+group items =
+    List.foldr
+        (\x acc ->
+            case acc of
                 [] ->
-                    List.reverse gathered
+                    [ ( x, [ x ] ) ]
 
-                toGather :: population ->
-                    let
-                        ( gathering, remaining ) =
-                            List.partition ((==) toGather) population
-                    in
-                    helper remaining <| ( toGather, gathering ) :: gathered
-    in
-    helper list []
+                ( y, restOfGroup ) :: groups ->
+                    if x == y then
+                        ( x, y :: restOfGroup ) :: groups
+
+                    else
+                        ( x, [ x ] ) :: acc
+        )
+        []
+        items
 </code></pre>
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

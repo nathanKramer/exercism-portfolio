@@ -1,23 +1,26 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Rotational Cipher</h2>
             <p>Solutions to rotational-cipher in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#elixir">Elixir</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="elixir">Elixir</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/elixir.html">Other Elixir solutions.</a>
+            <a href="/languages/elixir.html">Other Elixir solutions.</a>
             <pre><code class="language-elixir">defmodule RotationalCipher do
+  @upper ?A..?Z
+  @lower ?a..?z
+
   @doc """
   Given a plaintext and amount to shift by, return a rotated string.
 
@@ -27,12 +30,30 @@
   """
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
+    text
+    |> String.to_charlist()
+    |> Enum.map(&rotate_char(&1, shift))
+    |> List.to_string()
+  end
+
+  defp rotate_char(char, shift) when char in @lower do
+    rotate_char(char, ?a, shift)
+  end
+
+  defp rotate_char(char, shift) when char in @upper do
+    rotate_char(char, ?A, shift)
+  end
+
+  defp rotate_char(char, _), do: char
+
+  defp rotate_char(char, base, shift) do
+    rem(char - base + shift, 26) + base
   end
 end
 </code></pre>
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

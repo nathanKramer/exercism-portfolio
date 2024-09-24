@@ -1,0 +1,36 @@
+
+        <html lang="en">
+        <head>
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Acronym</h2>
+            <p>Solutions to acronym in various languages.</p>
+            <ul>
+              <li><a href="/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#elm">Elm</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module Acronym exposing (abbreviate)
+
+
+abbreviate : String -> String
+abbreviate =
+    String.replace "-" " "
+        >> String.words
+        >> List.map (String.slice 0 1)
+        >> String.concat
+        >> String.toUpper
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/assets/prism.js"></script>
+        </html>
+        

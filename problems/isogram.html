@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Isogram</h2>
             <p>Solutions to isogram in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#nim">Nim</a></li></ul>
+            <ul><li><a href="#nim">Nim</a></li><li><a href="#elm">Elm</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="nim">Nim</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/nim.html">Other Nim solutions.</a>
+            <a href="/languages/nim.html">Other Nim solutions.</a>
             <pre><code class="language-nim">import sets, unicode, sequtils, sugar
 
 proc isIsogram*(str: string): bool =
@@ -27,8 +27,28 @@ proc isIsogram*(str: string): bool =
   return true
 </code></pre>
         
+
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module Isogram exposing (isIsogram)
+
+import Set
+
+
+isIsogram : String -> Bool
+isIsogram sentence =
+    let
+        letters =
+            sentence
+                |> String.toList
+                |> List.map Char.toLower
+                |> List.filter Char.isAlpha
+    in
+    List.length letters == Set.size (Set.fromList letters)
+</code></pre>
+        
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

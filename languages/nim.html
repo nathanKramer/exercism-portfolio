@@ -1,29 +1,29 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Nim</h2>
             <p>Problems solved in nim.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#hello-world">Hello World</a></li><li><a href="#isogram">Isogram</a></li><li><a href="#leap">Leap</a></li><li><a href="#pangram">Pangram</a></li><li><a href="#reverse-string">Reverse String</a></li><li><a href="#two-fer">Two Fer</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-nim">proc hello*: string =
   "Hello, World!"
 </code></pre>
         
 
             <h3><a name="isogram">Isogram</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/isogram.html">Other "Isogram" solutions.</a>
+            <a href="/problems/isogram.html">Other "Isogram" solutions.</a>
             <pre><code class="language-nim">import sets, unicode, sequtils, sugar
 
 proc isIsogram*(str: string): bool =
@@ -36,7 +36,7 @@ proc isIsogram*(str: string): bool =
         
 
             <h3><a name="leap">Leap</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/leap.html">Other "Leap" solutions.</a>
+            <a href="/problems/leap.html">Other "Leap" solutions.</a>
             <pre><code class="language-nim">func isLeapYear*(year: int): bool =
   year mod 4 == 0 and (
     year mod 100 != 0 or year mod 400 == 0
@@ -45,16 +45,20 @@ proc isIsogram*(str: string): bool =
         
 
             <h3><a name="pangram">Pangram</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/pangram.html">Other "Pangram" solutions.</a>
-            <pre><code class="language-nim">import sequtils, strutils
+            <a href="/problems/pangram.html">Other "Pangram" solutions.</a>
+            <pre><code class="language-nim">import unicode, sequtils
 
-func isPangram*(phrase: string): bool =
-  {'a'..'z'}.allIt it.in(phrase.toLower)
+const alphabet = {'A'..'Z'}
+proc isPangram*(str: string): bool =
+  all(
+    toSeq(alphabet),
+    proc(c: system.char): bool = c in str.toUpper
+  )
 </code></pre>
         
 
             <h3><a name="reverse-string">Reverse String</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/reverse-string.html">Other "Reverse String" solutions.</a>
+            <a href="/problems/reverse-string.html">Other "Reverse String" solutions.</a>
             <pre><code class="language-nim">proc reverse*(s: string): string =
   if s == "":
     return s
@@ -67,7 +71,7 @@ func isPangram*(phrase: string): bool =
         
 
             <h3><a name="two-fer">Two Fer</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/two-fer.html">Other "Two Fer" solutions.</a>
+            <a href="/problems/two-fer.html">Other "Two Fer" solutions.</a>
             <pre><code class="language-nim">import strformat
 
 proc twoFer*(name = "you"): string =
@@ -76,6 +80,6 @@ proc twoFer*(name = "you"): string =
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

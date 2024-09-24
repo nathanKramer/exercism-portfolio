@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Leap</h2>
             <p>Solutions to leap in various languages.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#ocaml">Ocaml</a></li><li><a href="#nim">Nim</a></li><li><a href="#rust">Rust</a></li><li><a href="#haskell">Haskell</a></li></ul>
+            <ul><li><a href="#ocaml">Ocaml</a></li><li><a href="#nim">Nim</a></li><li><a href="#rust">Rust</a></li><li><a href="#elm">Elm</a></li><li><a href="#haskell">Haskell</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="ocaml">Ocaml</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/ocaml.html">Other Ocaml solutions.</a>
+            <a href="/languages/ocaml.html">Other Ocaml solutions.</a>
             <pre><code class="language-ocaml">let leap_year year = 
     year mod 4 = 0 && 
         (year mod 100 <> 0 || year mod 400 = 0)
@@ -24,7 +24,7 @@
         
 
             <h3><a name="nim">Nim</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/nim.html">Other Nim solutions.</a>
+            <a href="/languages/nim.html">Other Nim solutions.</a>
             <pre><code class="language-nim">func isLeapYear*(year: int): bool =
   year mod 4 == 0 and (
     year mod 100 != 0 or year mod 400 == 0
@@ -33,19 +33,44 @@
         
 
             <h3><a name="rust">Rust</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/rust.html">Other Rust solutions.</a>
+            <a href="/languages/rust.html">Other Rust solutions.</a>
             <pre><code class="language-rust">pub fn is_leap_year(year: u64) -> bool {
     return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
 }
 </code></pre>
         
 
+            <h3><a name="elm">Elm</a></h3>
+            <a href="/languages/elm.html">Other Elm solutions.</a>
+            <pre><code class="language-elm">module Leap exposing (isLeapYear)
+
+
+divisbleBy : Int -> Int -> Bool
+divisbleBy div x =
+    modBy div x == 0
+
+
+isLeapYear : Int -> Bool
+isLeapYear year =
+    List.all
+        (\fn -> fn year)
+        [ divisbleBy 4
+        , fOr (divisbleBy 100 >> not) (divisbleBy 400)
+        ]
+
+
+fOr f g x =
+    f x || g x
+</code></pre>
+        
+
             <h3><a name="haskell">Haskell</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/languages/haskell.html">Other Haskell solutions.</a>
+            <a href="/languages/haskell.html">Other Haskell solutions.</a>
             <pre><code class="language-haskell">module LeapYear
   ( isLeapYear
   ) where
 
+-- insert tier 4 galaxy brain meme
 bind :: (b -> b -> b) -> (a -> b) -> (a -> b) -> a -> b
 bind f a b x = f (a x) (b x)
 
@@ -67,6 +92,6 @@ isLeapYear = isDivisibleBy 400 ||$ (isDivisibleBy 4 &&$ not . isDivisibleBy 100)
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

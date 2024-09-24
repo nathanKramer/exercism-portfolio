@@ -1,0 +1,52 @@
+
+        <html lang="en">
+        <head>
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Take A Number</h2>
+            <p>Solutions to take-a-number in various languages.</p>
+            <ul>
+              <li><a href="/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#elixir">Elixir</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="elixir">Elixir</a></h3>
+            <a href="/languages/elixir.html">Other Elixir solutions.</a>
+            <pre><code class="language-elixir">defmodule TakeANumber do
+  def start() do
+    spawn(&loop/0)
+  end
+
+  defp loop(state \\ 0) do
+    new_state = state
+
+    receive do
+      {:report_state, sender_pid} ->
+        send(sender_pid, state)
+        loop(state)
+
+      {:take_a_number, sender_pid} ->
+        new_state = new_state + 1
+        send(sender_pid, new_state)
+        loop(new_state)
+
+      :stop ->
+        nil
+
+      _ ->
+        loop(state)
+    end
+  end
+end
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/assets/prism.js"></script>
+        </html>
+        

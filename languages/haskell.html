@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Haskell</h2>
             <p>Problems solved in haskell.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul><li><a href="#bob">Bob</a></li><li><a href="#collatz-conjecture">Collatz Conjecture</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#leap">Leap</a></li><li><a href="#pangram">Pangram</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#space-age">Space Age</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="bob">Bob</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/bob.html">Other "Bob" solutions.</a>
+            <a href="/problems/bob.html">Other "Bob" solutions.</a>
             <pre><code class="language-haskell">module Bob (responseFor) where
 
 import qualified Data.Char as C
@@ -41,7 +41,7 @@ responseFor str
         
 
             <h3><a name="collatz-conjecture">Collatz Conjecture</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
+            <a href="/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
             <pre><code class="language-haskell">module CollatzConjecture (collatz) where
 
 collatz' :: Integer -> Integer
@@ -58,7 +58,7 @@ collatz n
         
 
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-haskell">module HelloWorld
   ( hello
   ) where
@@ -69,11 +69,12 @@ hello = "Hello, World!"
         
 
             <h3><a name="leap">Leap</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/leap.html">Other "Leap" solutions.</a>
+            <a href="/problems/leap.html">Other "Leap" solutions.</a>
             <pre><code class="language-haskell">module LeapYear
   ( isLeapYear
   ) where
 
+-- insert tier 4 galaxy brain meme
 bind :: (b -> b -> b) -> (a -> b) -> (a -> b) -> a -> b
 bind f a b x = f (a x) (b x)
 
@@ -95,7 +96,7 @@ isLeapYear = isDivisibleBy 400 ||$ (isDivisibleBy 4 &&$ not . isDivisibleBy 100)
         
 
             <h3><a name="pangram">Pangram</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/pangram.html">Other "Pangram" solutions.</a>
+            <a href="/problems/pangram.html">Other "Pangram" solutions.</a>
             <pre><code class="language-haskell">module Pangram
   ( isPangram
   ) where
@@ -109,7 +110,7 @@ isPangram = null . (['a' .. 'z'] \\) . map Char.toLower
         
 
             <h3><a name="rna-transcription">Rna Transcription</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
+            <a href="/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
             <pre><code class="language-haskell">module DNA (toRNA) where
 
 import qualified Data.Map as M
@@ -134,7 +135,7 @@ toRNA =
         
 
             <h3><a name="space-age">Space Age</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/space-age.html">Other "Space Age" solutions.</a>
+            <a href="/problems/space-age.html">Other "Space Age" solutions.</a>
             <pre><code class="language-haskell">module SpaceAge
   ( Planet(..)
   , ageOn
@@ -171,6 +172,6 @@ ageOn planet seconds = seconds / earthAgeSeconds / relativeOrbit planet
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

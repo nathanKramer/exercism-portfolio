@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Clojure</h2>
             <p>Problems solved in clojure.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#anagram">Anagram</a></li><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#beer-song">Beer Song</a></li><li><a href="#binary-search">Binary Search</a></li><li><a href="#bob">Bob</a></li><li><a href="#collatz-conjecture">Collatz Conjecture</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#isbn-verifier">Isbn Verifier</a></li><li><a href="#pov">Pov</a></li><li><a href="#raindrops">Raindrops</a></li><li><a href="#reverse-string">Reverse String</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#roman-numerals">Roman Numerals</a></li><li><a href="#run-length-encoding">Run Length Encoding</a></li><li><a href="#say">Say</a></li><li><a href="#series">Series</a></li><li><a href="#two-fer">Two Fer</a></li><li><a href="#word-count">Word Count</a></li></ul>
+            <ul><li><a href="#anagram">Anagram</a></li><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#beer-song">Beer Song</a></li><li><a href="#binary-search">Binary Search</a></li><li><a href="#bob">Bob</a></li><li><a href="#cars-assemble">Cars Assemble</a></li><li><a href="#collatz-conjecture">Collatz Conjecture</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#isbn-verifier">Isbn Verifier</a></li><li><a href="#lucians-luscious-lasagna">Lucians Luscious Lasagna</a></li><li><a href="#pov">Pov</a></li><li><a href="#raindrops">Raindrops</a></li><li><a href="#reverse-string">Reverse String</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#roman-numerals">Roman Numerals</a></li><li><a href="#run-length-encoding">Run Length Encoding</a></li><li><a href="#say">Say</a></li><li><a href="#series">Series</a></li><li><a href="#two-fer">Two Fer</a></li><li><a href="#word-count">Word Count</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="anagram">Anagram</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/anagram.html">Other "Anagram" solutions.</a>
+            <a href="/problems/anagram.html">Other "Anagram" solutions.</a>
             <pre><code class="language-clojure">(ns anagram
   (:require [clojure.string :refer [lower-case]]))
 
@@ -35,7 +35,7 @@
         
 
             <h3><a name="armstrong-numbers">Armstrong Numbers</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
+            <a href="/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
             <pre><code class="language-clojure">(ns armstrong-numbers)
 
 (defn digits [num]
@@ -54,7 +54,7 @@
         
 
             <h3><a name="beer-song">Beer Song</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/beer-song.html">Other "Beer Song" solutions.</a>
+            <a href="/problems/beer-song.html">Other "Beer Song" solutions.</a>
             <pre><code class="language-clojure">(ns beer-song
   (:require [clojure.string :as str]))
 
@@ -86,7 +86,7 @@
         
 
             <h3><a name="binary-search">Binary Search</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/binary-search.html">Other "Binary Search" solutions.</a>
+            <a href="/problems/binary-search.html">Other "Binary Search" solutions.</a>
             <pre><code class="language-clojure">(ns binary-search)
 
 (defn middle [coll]
@@ -105,7 +105,7 @@
         
 
             <h3><a name="bob">Bob</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/bob.html">Other "Bob" solutions.</a>
+            <a href="/problems/bob.html">Other "Bob" solutions.</a>
             <pre><code class="language-clojure">(ns bob
   (:require [clojure.string :refer [blank? ends-with? trim]]))
 
@@ -114,13 +114,13 @@
 
 (defn is-yelling [s]
   (let [alphas (filter #(Character/isLetter %) s)]
-    (and
-     (not-empty alphas)
-     (every?
-      #(Character/isUpperCase %)
-      alphas))))
+    (and (not-empty alphas)
+         (every?
+          #(Character/isUpperCase %)
+          alphas))))
 
 (defn response-for
+  "Does Bob stuff"
   [input]
   (let [s (trim input)]
     (cond
@@ -132,8 +132,33 @@
 </code></pre>
         
 
+            <h3><a name="cars-assemble">Cars Assemble</a></h3>
+            <a href="/problems/cars-assemble.html">Other "Cars Assemble" solutions.</a>
+            <pre><code class="language-clojure">(ns cars-assemble)
+
+(def cars-per-hr 221)
+
+(defn production-rate
+  "Returns the assembly line's production rate per hour,
+   taking into account its success rate"
+  [speed]
+  (let [success-rate (cond (= speed 10) 0.77
+                           (= speed 9) 0.8
+                           (>= speed 5) 0.9
+                           :else 1.0)
+        base-rate (* speed cars-per-hr)]
+    (* base-rate success-rate)))
+
+(defn working-items
+  "Calculates how many working cars are produced per minute"
+  [speed]
+  (let [minute-rate (/ (production-rate speed) 60)]
+    (int minute-rate)))
+</code></pre>
+        
+
             <h3><a name="collatz-conjecture">Collatz Conjecture</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
+            <a href="/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
             <pre><code class="language-clojure">(ns collatz-conjecture)
 
 (defn- next-collatz-num [num]
@@ -155,7 +180,7 @@
         
 
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-clojure">(ns hello-world)
 
 (defn hello [] "Hello, World!")
@@ -163,7 +188,7 @@
         
 
             <h3><a name="isbn-verifier">Isbn Verifier</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/isbn-verifier.html">Other "Isbn Verifier" solutions.</a>
+            <a href="/problems/isbn-verifier.html">Other "Isbn Verifier" solutions.</a>
             <pre><code class="language-clojure">(ns isbn-verifier
   (:require [clojure.string :as str]))
 
@@ -197,32 +222,54 @@
     (and valid-input? (verify-isbn parsed))))
 
 
-(isbn? "3-598-21507-X")
+</code></pre>
+        
+
+            <h3><a name="lucians-luscious-lasagna">Lucians Luscious Lasagna</a></h3>
+            <a href="/problems/lucians-luscious-lasagna.html">Other "Lucians Luscious Lasagna" solutions.</a>
+            <pre><code class="language-clojure">;; 👋🏽 Hi there! Welcome to the Clojure Track.
+;; The online test-runner is powered by babashka and the Small Clojure Interpreter (SCI).
+;; Almost all language features are supported, with the exception of low-level constructs
+;; like `deftype`, and certain Java classes. For more info, see:
+;; https://github.com/babashka/babashka#differences-with-clojure
+
+(ns lucians-luscious-lasagna)
+
+(def expected-time 40)
+
+(defn remaining-time
+  "Takes the actual time in minutes the lasagna has been in the oven,
+   and returns how many minutes the lasagna still has to remain in the oven."
+  [actual-time]
+  (- expected-time actual-time))
+
+(defn prep-time
+  "Takes the number of layers added to the lasagna,
+   and returns how many minutes you spent preparing the lasagna"
+  [num-layers]
+  (* 2 num-layers))
+
+(defn total-time
+  "Takes the number of layers of lasagna and the actual time in minutes it has been in the oven.
+   Returns how many minutes in total you've worked on cooking the lasagna"
+  [num-layers actual-time]
+  (+ (prep-time num-layers) actual-time))
 </code></pre>
         
 
             <h3><a name="pov">Pov</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/pov.html">Other "Pov" solutions.</a>
+            <a href="/problems/pov.html">Other "Pov" solutions.</a>
             <pre><code class="language-clojure">(ns pov)
 
 (defn of [node tree]
-  (let [[head & children] tree]
-    (cond
-      (= node head) head
-      (vector? head) (of node head)
-      (some? children) (conj (of node children) head)
-      :else head)))
-
-(def simple-tree [:parent [:sibling] [:x]])
-
-(of :x simple-tree)
+  tree)
 
 (defn path-from-to [])
 </code></pre>
         
 
             <h3><a name="raindrops">Raindrops</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/raindrops.html">Other "Raindrops" solutions.</a>
+            <a href="/problems/raindrops.html">Other "Raindrops" solutions.</a>
             <pre><code class="language-clojure">(ns raindrops)
 
 (defn- substitute-factors-with [n substitutions]
@@ -246,7 +293,7 @@
         
 
             <h3><a name="reverse-string">Reverse String</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/reverse-string.html">Other "Reverse String" solutions.</a>
+            <a href="/problems/reverse-string.html">Other "Reverse String" solutions.</a>
             <pre><code class="language-clojure">(ns reverse-string)
 
 (defn reverse-string [s]
@@ -256,7 +303,7 @@
         
 
             <h3><a name="rna-transcription">Rna Transcription</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
+            <a href="/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
             <pre><code class="language-clojure">;; Given a DNA strand, return its RNA complement (per RNA transcription) .
 
 ;; Both DNA and RNA strands are a sequence of nucleotides.
@@ -277,7 +324,7 @@
         
 
             <h3><a name="roman-numerals">Roman Numerals</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/roman-numerals.html">Other "Roman Numerals" solutions.</a>
+            <a href="/problems/roman-numerals.html">Other "Roman Numerals" solutions.</a>
             <pre><code class="language-clojure">(ns roman-numerals)
 
 (def romans [[1000 "M"]
@@ -307,7 +354,7 @@
         
 
             <h3><a name="run-length-encoding">Run Length Encoding</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/run-length-encoding.html">Other "Run Length Encoding" solutions.</a>
+            <a href="/problems/run-length-encoding.html">Other "Run Length Encoding" solutions.</a>
             <pre><code class="language-clojure">(ns run-length-encoding)
 
 (defn run-length-encode
@@ -338,7 +385,7 @@
         
 
             <h3><a name="say">Say</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/say.html">Other "Say" solutions.</a>
+            <a href="/problems/say.html">Other "Say" solutions.</a>
             <pre><code class="language-clojure">(ns say
   (:require [clojure.string :refer [join]]))
 
@@ -383,6 +430,10 @@
     (fn [[val _]] (> val num))
     magnitudes)))
 
+(next-magnitude 5234)
+;; => [1000 "thousand"]
+
+
 (defn- say-compound-word
   [num]
   (let [small (rem num 10)
@@ -402,7 +453,7 @@
                 filtered-components (filter
                                      not-empty
                                      components)]
-            (join " " filtered-components))))
+            (str (join " " filtered-components)))))
 
 
 ;;; EXPORTS
@@ -416,11 +467,26 @@
   (if (= num 0)
     "zero"
     (say num)))
+
+(number 0)
+(number 1035053)
+;; => Syntax error compiling at (say.clj:80:1).
+;;    Unable to resolve symbol: number in this context
+
+;; => "one million thirty-five thousand fifty-three"
+
+;; => "zero"
+
+;; => Syntax error compiling at (say.clj:79:1).
+;;    Unable to resolve symbol: number in this context
+(number 09238420394)
+;; => Syntax error reading source at (REPL:94:20).
+;;    Invalid number: 09238420394
 </code></pre>
         
 
             <h3><a name="series">Series</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/series.html">Other "Series" solutions.</a>
+            <a href="/problems/series.html">Other "Series" solutions.</a>
             <pre><code class="language-clojure">(ns series)
 
 (defn slices [s slice-length]
@@ -434,7 +500,7 @@
         
 
             <h3><a name="two-fer">Two Fer</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/two-fer.html">Other "Two Fer" solutions.</a>
+            <a href="/problems/two-fer.html">Other "Two Fer" solutions.</a>
             <pre><code class="language-clojure">(ns two-fer)
 
 (defn two-fer
@@ -444,12 +510,12 @@
         
 
             <h3><a name="word-count">Word Count</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/word-count.html">Other "Word Count" solutions.</a>
+            <a href="/problems/word-count.html">Other "Word Count" solutions.</a>
             <pre><code class="language-clojure">(ns word-count
-  (:require [clojure.string :refer [split lower-case]]))
+  (:require [clojure.string :refer [split]]))
 
 (defn word-count [s]
-  (let [words (split (lower-case s) #" ")
+  (let [words (split s #" ")
         grouped-words (group-by identity words)]
     (zipmap
      (keys grouped-words)
@@ -458,6 +524,6 @@
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

@@ -1,0 +1,46 @@
+
+        <html lang="en">
+        <head>
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Cars Assemble</h2>
+            <p>Solutions to cars-assemble in various languages.</p>
+            <ul>
+              <li><a href="/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#clojure">Clojure</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="clojure">Clojure</a></h3>
+            <a href="/languages/clojure.html">Other Clojure solutions.</a>
+            <pre><code class="language-clojure">(ns cars-assemble)
+
+(def cars-per-hr 221)
+
+(defn production-rate
+  "Returns the assembly line's production rate per hour,
+   taking into account its success rate"
+  [speed]
+  (let [success-rate (cond (= speed 10) 0.77
+                           (= speed 9) 0.8
+                           (>= speed 5) 0.9
+                           :else 1.0)
+        base-rate (* speed cars-per-hr)]
+    (* base-rate success-rate)))
+
+(defn working-items
+  "Calculates how many working cars are produced per minute"
+  [speed]
+  (let [minute-rate (/ (production-rate speed) 60)]
+    (int minute-rate)))
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/assets/prism.js"></script>
+        </html>
+        

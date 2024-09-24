@@ -1,43 +1,28 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Ocaml</h2>
             <p>Problems solved in ocaml.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#hamming">Hamming</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#leap">Leap</a></li></ul>
+            <ul><li><a href="#hello-world">Hello World</a></li><li><a href="#leap">Leap</a></li></ul>
             </div>
             <div class="main">
             
-            <h3><a name="hamming">Hamming</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hamming.html">Other "Hamming" solutions.</a>
-            <pre><code class="language-ocaml">open Base
-
-type nucleotide = A | C | G | T
-
-let hamming_distance a b =
-  match List.zip a b with
-  | [] -> 0
-  | [ ([ (x :: xs) ] :: rest) ] -> 1 + hamming_distance rest
-</code></pre>
-        
-
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
-            <pre><code class="language-ocaml">let positive_sum a b =
-  let a = max a 0 and b = max b 0 in
-  a + b
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <pre><code class="language-ocaml">let hello = "Hello, World!"
 </code></pre>
         
 
             <h3><a name="leap">Leap</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/leap.html">Other "Leap" solutions.</a>
+            <a href="/problems/leap.html">Other "Leap" solutions.</a>
             <pre><code class="language-ocaml">let leap_year year = 
     year mod 4 = 0 && 
         (year mod 100 <> 0 || year mod 400 = 0)
@@ -45,6 +30,6 @@ let hamming_distance a b =
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

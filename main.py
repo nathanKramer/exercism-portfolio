@@ -103,6 +103,7 @@ def resolveSolution(rootDir, problem, metadata):
         problem,  # naive
         '_'.join(words),  # snake
         ''.join([word.capitalize() for word in words]),  # camel
+        '-'.join(words), # kebab
         metadataLookup  # hardcoded
     ]
     for attempt in attempts:
@@ -135,17 +136,17 @@ def titlize(kebab):
 
 def renderPage(rootDir, title, summary, items, markup):
     return f"""
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="{rootDir}/assets/prism.css" />
-            <link rel="stylesheet" href="{rootDir}/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>{title}</h2>
             <p>{summary}</p>
             <ul>
-              <li><a href="{rootDir}/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
             <ul>{"".join([ f'<li><a href="#{item}">{titlize(item)}</a></li>' for item in items])}</ul>
             </div>
@@ -153,7 +154,7 @@ def renderPage(rootDir, title, summary, items, markup):
             {markup}
             </div>
         </body>
-        <script src="{rootDir}/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         """
 
@@ -167,7 +168,7 @@ def languagePage(rootDir, language, problems):
             continue
         solution_markup = f"""
             <h3><a name="{problem}">{titlize(problem)}</a></h3>
-            <a href="{rootDir}/problems/{problem}.html">Other "{titlize(problem)}" solutions.</a>
+            <a href="/problems/{problem}.html">Other "{titlize(problem)}" solutions.</a>
             <pre><code class="language-{language}">{solution_code}</code></pre>
         """
         solutions.append(solution_markup)
@@ -191,7 +192,7 @@ def problemPage(rootDir, problem, languages):
             continue
         solution_markup = f"""
             <h3><a name="{language}">{titlize(language)}</a></h3>
-            <a href="{rootDir}/languages/{language}.html">Other {titlize(language)} solutions.</a>
+            <a href="/languages/{language}.html">Other {titlize(language)} solutions.</a>
             <pre><code class="language-{language}">{solution_code}</code></pre>
         """
         solutions.append(solution_markup)
@@ -209,20 +210,22 @@ def problemPage(rootDir, problem, languages):
 
 def renderIndexPage(root, portfolio):
     return f"""
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="{root}/assets/prism.css" />
-            <link rel="stylesheet" href="{root}/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
-            <h2>Exercism Portfolio</h2>
-            <h3>About</h3>
-            <p>The code here is pulled straight from my <a href="https://exercism.io/profiles/nathanKramer">exercism.io profile</a>.</p>
-            <p>I use exercism.io for learning purposes, so while all code here is authored by me, I do often learn from the solutions of others.</p>
-            <h3>Languages</h3>
-            <ul>{"".join([ f'<li><a href="{root}/languages/{language}.html">{titlize(language)}</a></li>' for language in portfolio['languages'].keys()])}</ul>
-            <h3>Problems</h3>
-            <ul>{"".join([ f'<li><a href="{root}/problems/{problem}.html">{titlize(problem)}</a></li>' for problem in portfolio['problems'].keys()])}</ul>
+            <article>
+                <h2>Exercism Portfolio</h2>
+                <h3>About</h3>
+                <p>The code here is pulled straight from my <a href="https://exercism.io/profiles/nathanKramer">exercism.io profile</a>.</p>
+                <p>I use exercism.io for learning purposes, so while all code here is authored by me, I do often learn from the solutions of others.</p>
+                <h3>Languages</h3>
+                <ul>{"".join([ f'<li><a href="/languages/{language}.html">{titlize(language)}</a></li>' for language in portfolio['languages'].keys()])}</ul>
+                <h3>Problems</h3>
+                <ul>{"".join([ f'<li><a href="/problems/{problem}.html">{titlize(problem)}</a></li>' for problem in portfolio['problems'].keys()])}</ul>
+            </article>
         </body>
         </html>
         """
@@ -247,6 +250,9 @@ def writePortfolioToFile(root, portfolio):
 
 
 def main():
+    if EXERCISM_DIR is None:
+        raise Exception("EXERCISM_DIR is required")
+
     languages = subdirectories(EXERCISM_DIR)
     problems_by_lang = {}
     langs_by_problem = {}

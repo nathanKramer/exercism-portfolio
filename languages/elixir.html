@@ -1,22 +1,38 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Elixir</h2>
             <p>Problems solved in elixir.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#beer-song">Beer Song</a></li><li><a href="#bob">Bob</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#list-ops">List Ops</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#robot-simulator">Robot Simulator</a></li><li><a href="#roman-numerals">Roman Numerals</a></li><li><a href="#rotational-cipher">Rotational Cipher</a></li><li><a href="#word-count">Word Count</a></li></ul>
+            <ul><li><a href="#basketball-website">Basketball Website</a></li><li><a href="#beer-song">Beer Song</a></li><li><a href="#bird-count">Bird Count</a></li><li><a href="#bob">Bob</a></li><li><a href="#boutique-inventory">Boutique Inventory</a></li><li><a href="#darts">Darts</a></li><li><a href="#freelancer-rates">Freelancer Rates</a></li><li><a href="#guessing-game">Guessing Game</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#high-school-sweetheart">High School Sweetheart</a></li><li><a href="#high-score">High Score</a></li><li><a href="#kitchen-calculator">Kitchen Calculator</a></li><li><a href="#language-list">Language List</a></li><li><a href="#lasagna">Lasagna</a></li><li><a href="#library-fees">Library Fees</a></li><li><a href="#list-ops">List Ops</a></li><li><a href="#log-level">Log Level</a></li><li><a href="#name-badge">Name Badge</a></li><li><a href="#paint-by-number">Paint By Number</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#robot-simulator">Robot Simulator</a></li><li><a href="#roman-numerals">Roman Numerals</a></li><li><a href="#rotational-cipher">Rotational Cipher</a></li><li><a href="#secrets">Secrets</a></li><li><a href="#take-a-number">Take A Number</a></li><li><a href="#wine-cellar">Wine Cellar</a></li><li><a href="#word-count">Word Count</a></li></ul>
             </div>
             <div class="main">
             
+            <h3><a name="basketball-website">Basketball Website</a></h3>
+            <a href="/problems/basketball-website.html">Other "Basketball Website" solutions.</a>
+            <pre><code class="language-elixir">defmodule BasketballWebsite do
+  def extract_from_path(data, path) do
+    path
+    |> String.split(".")
+    |> Enum.reduce(data, fn key, acc -> acc[key] end)
+  end
+
+  def get_in_path(data, path) do
+    get_in(data, String.split(path, "."))
+  end
+end
+</code></pre>
+        
+
             <h3><a name="beer-song">Beer Song</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/beer-song.html">Other "Beer Song" solutions.</a>
+            <a href="/problems/beer-song.html">Other "Beer Song" solutions.</a>
             <pre><code class="language-elixir">defmodule BeerSong do
   @doc """
   Get a single verse of the beer song
@@ -53,8 +69,33 @@ end
 </code></pre>
         
 
+            <h3><a name="bird-count">Bird Count</a></h3>
+            <a href="/problems/bird-count.html">Other "Bird Count" solutions.</a>
+            <pre><code class="language-elixir">defmodule BirdCount do
+  @busy_day_threshold 5
+
+  def today([]), do: nil
+  def today([today | _]), do: today
+
+  def increment_day_count([]), do: [1]
+  def increment_day_count([today | rest]), do: [today + 1 | rest]
+
+  def has_day_without_birds?([]), do: false
+  def has_day_without_birds?([0 | _]), do: true
+  def has_day_without_birds?([_ | rest]), do: has_day_without_birds?(rest)
+
+  def total([]), do: 0
+  def total([head | rest]), do: head + total(rest)
+
+  def busy_days([]), do: 0
+  def busy_days([head | rest]) when head >= @busy_day_threshold, do: 1 + busy_days(rest)
+  def busy_days([_ | rest]), do: busy_days(rest)
+end
+</code></pre>
+        
+
             <h3><a name="bob">Bob</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/bob.html">Other "Bob" solutions.</a>
+            <a href="/problems/bob.html">Other "Bob" solutions.</a>
             <pre><code class="language-elixir">defmodule Bob do
   def hey(input) do
     input |> String.trim() |> highly_sophisticated_nlp
@@ -103,8 +144,122 @@ end
 </code></pre>
         
 
+            <h3><a name="boutique-inventory">Boutique Inventory</a></h3>
+            <a href="/problems/boutique-inventory.html">Other "Boutique Inventory" solutions.</a>
+            <pre><code class="language-elixir">defmodule BoutiqueInventory do
+  def sort_by_price(inventory) do
+    Enum.sort_by(inventory, fn row -> row[:price] end)
+  end
+
+  def with_missing_price(inventory) do
+    Enum.filter(inventory, fn row -> !row[:price] end)
+  end
+
+  def update_names(inventory, old_word, new_word) do
+    Enum.map(inventory, fn row ->
+      %{row | name: String.replace(row.name, old_word, new_word)}
+    end)
+  end
+
+  def increase_quantity(item, count) do
+    new_quantities = Map.new(item.quantity_by_size, fn {k, v} -> {k, v + count} end)
+
+    %{item | quantity_by_size: new_quantities}
+  end
+
+  def total_quantity(item) do
+    Enum.reduce(
+      item.quantity_by_size,
+      0,
+      fn {_, x}, acc -> acc + x end
+    )
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="darts">Darts</a></h3>
+            <a href="/problems/darts.html">Other "Darts" solutions.</a>
+            <pre><code class="language-elixir">defmodule Darts do
+  @type position :: {number, number}
+
+  @doc """
+  Calculate the score of a single dart hitting a target
+  """
+  @spec score(position) :: integer
+  def score({x, y}) do
+    r = (x ** 2 + y ** 2) ** 0.5
+
+    cond do
+      r <= 1 -> 10
+      r <= 5 -> 5
+      r <= 10 -> 1
+      true -> 0
+    end
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="freelancer-rates">Freelancer Rates</a></h3>
+            <a href="/problems/freelancer-rates.html">Other "Freelancer Rates" solutions.</a>
+            <pre><code class="language-elixir">defmodule FreelancerRates do
+  @hours_per_day 8.0
+  @billable_days_per_month 22.0
+
+  def daily_rate(hourly_rate) do
+    @hours_per_day * hourly_rate
+  end
+
+  def apply_discount(before_discount, discount) do
+    before_discount - before_discount * (discount / 100)
+  end
+
+  def monthly_rate(hourly_rate, discount) do
+    before_discount = @billable_days_per_month * daily_rate(hourly_rate)
+    ceil(apply_discount(before_discount, discount))
+  end
+
+  def days_in_budget(budget, hourly_rate, discount) do
+    rate = apply_discount(daily_rate(hourly_rate), discount)
+
+    Float.floor(budget / rate, 1)
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="guessing-game">Guessing Game</a></h3>
+            <a href="/problems/guessing-game.html">Other "Guessing Game" solutions.</a>
+            <pre><code class="language-elixir">defmodule GuessingGame do
+  def compare(_, guess \\ :no_guess)
+
+  def compare(secret_number, guess) when guess == secret_number do
+    "Correct"
+  end
+
+  def compare(_, :no_guess) do
+    "Make a guess"
+  end
+
+  def compare(secret_number, guess)
+      when abs(guess - secret_number) == 1 do
+    "So close"
+  end
+
+  def compare(secret_number, guess) when guess > secret_number do
+    "Too high"
+  end
+
+  def compare(secret_number, guess) when guess < secret_number do
+    "Too low"
+  end
+end
+</code></pre>
+        
+
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-elixir">defmodule HelloWorld do
   @doc """
   Simply returns "Hello, World!"
@@ -117,8 +272,222 @@ end
 </code></pre>
         
 
+            <h3><a name="high-school-sweetheart">High School Sweetheart</a></h3>
+            <a href="/problems/high-school-sweetheart.html">Other "High School Sweetheart" solutions.</a>
+            <pre><code class="language-elixir">defmodule HighSchoolSweetheart do
+  def first_letter(name) do
+    name
+    |> String.trim()
+    |> String.first()
+  end
+
+  def initial(name) do
+    name
+    |> first_letter
+    |> String.upcase
+    |> Kernel.<>(".")
+  end
+
+  def initials(full_name) do
+    full_name
+    |> String.split(" ")
+    |> Enum.map(&initial/1)
+    |> Enum.join(" ")
+  end
+
+  def pair(full_name1, full_name2) do
+    i1 = initials(full_name1)
+    i2 = initials(full_name2)
+    """
+         ******       ******
+       **      **   **      **
+     **         ** **         **
+    **            *            **
+    **                         **
+    **     #{i1}  +  #{i2}     **
+     **                       **
+       **                   **
+         **               **
+           **           **
+             **       **
+               **   **
+                 ***
+                  *
+    """
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="high-score">High Score</a></h3>
+            <a href="/problems/high-score.html">Other "High Score" solutions.</a>
+            <pre><code class="language-elixir">defmodule HighScore do
+  @initial_score 0
+
+  def new(), do: %{}
+
+  def add_player(scores, name, score \\ @initial_score) do
+    Map.put(scores, name, score)
+  end
+
+  def remove_player(scores, name) do
+    Map.delete(scores, name)
+  end
+
+  def reset_score(scores, name) do
+    Map.put(scores, name, @initial_score)
+  end
+
+  def update_score(scores, name, score) do
+    Map.update(scores, name, score, fn val -> val + score end)
+  end
+
+  def get_players(scores) do
+    Map.keys(scores)
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="kitchen-calculator">Kitchen Calculator</a></h3>
+            <a href="/problems/kitchen-calculator.html">Other "Kitchen Calculator" solutions.</a>
+            <pre><code class="language-elixir">defmodule KitchenCalculator do
+  def get_volume({_, numeric}), do: numeric
+
+  def to_milliliter({:milliliter, numeric}), do: {:milliliter, numeric}
+  def to_milliliter({:cup, numeric}), do: {:milliliter, numeric * 240}
+  def to_milliliter({:fluid_ounce, numeric}), do: {:milliliter, numeric * 30}
+  def to_milliliter({:teaspoon, numeric}), do: {:milliliter, numeric * 5}
+  def to_milliliter({:tablespoon, numeric}), do: {:milliliter, numeric * 15}
+  def to_milliliter(volume_pair), do: volume_pair
+
+  def from_milliliter({_, num}, :cup), do: {:cup, num / 240}
+  def from_milliliter({_, num}, :fluid_ounce), do: {:fluid_ounce, num / 30}
+  def from_milliliter({_, num}, :teaspoon), do: {:teaspoon, num / 5}
+  def from_milliliter({_, num}, :tablespoon), do: {:tablespoon, num / 15}
+  def from_milliliter(volume_pair, :milliliter), do: volume_pair
+
+  def convert(volume_pair, unit) do
+    volume_pair |> to_milliliter |> from_milliliter(unit)
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="language-list">Language List</a></h3>
+            <a href="/problems/language-list.html">Other "Language List" solutions.</a>
+            <pre><code class="language-elixir">defmodule LanguageList do
+  def new() do
+    []
+  end
+
+  def add(list, language) do
+    [language | list]
+  end
+
+  def remove([_ | tail]) do
+    tail
+  end
+
+  def first([head | _]) do
+    head
+  end
+
+  def count(list) do
+    length(list)
+  end
+
+  def functional_list?(list) do
+    "Elixir" in list
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="lasagna">Lasagna</a></h3>
+            <a href="/problems/lasagna.html">Other "Lasagna" solutions.</a>
+            <pre><code class="language-elixir">defmodule Lasagna do
+  def expected_minutes_in_oven, do: 40
+
+  def remaining_minutes_in_oven(t) do
+    expected_minutes_in_oven() - t
+  end
+
+  def preparation_time_in_minutes(layers) do
+    2 * layers
+  end
+
+  def total_time_in_minutes(layers, minutes) do
+    preparation_time_in_minutes(layers) + minutes
+  end
+
+  def alarm, do: "Ding!"
+end
+</code></pre>
+        
+
+            <h3><a name="library-fees">Library Fees</a></h3>
+            <a href="/problems/library-fees.html">Other "Library Fees" solutions.</a>
+            <pre><code class="language-elixir">defmodule LibraryFees do
+  def datetime_from_string(string) do
+    NaiveDateTime.from_iso8601!(string)
+  end
+
+  def before_noon?(datetime) do
+    datetime.hour < 12
+  end
+
+  def return_date(checkout_datetime) do
+    days_to_add = additional_days(before_noon?(checkout_datetime))
+
+    NaiveDateTime.to_date(checkout_datetime)
+    |> Date.add(days_to_add)
+  end
+
+  def days_late(planned_return_date, actual_return_datetime) do
+    return_d = NaiveDateTime.to_date(actual_return_datetime)
+
+    if Date.before?(return_d, planned_return_date) do
+      0
+    else
+      Date.diff(return_d, planned_return_date)
+    end
+  end
+
+  def monday?(datetime) do
+    datetime
+    |> NaiveDateTime.to_date()
+    |> Date.day_of_week() == 1
+  end
+
+  def calculate_late_fee(checkout, return, rate) do
+    return_datetime = datetime_from_string(return)
+    checkout_datetime = datetime_from_string(checkout)
+    scheduled_return_date = return_date(checkout_datetime)
+
+    days_late = days_late(scheduled_return_date, return_datetime)
+    fee = rate * days_late
+
+    if monday?(return_datetime) do
+      div(fee, 2)
+    else
+      fee
+    end
+  end
+
+  defp additional_days(before_noon) when before_noon == true do
+    28
+  end
+
+  defp additional_days(before_noon) when before_noon == false do
+    29
+  end
+end
+</code></pre>
+        
+
             <h3><a name="list-ops">List Ops</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/list-ops.html">Other "List Ops" solutions.</a>
+            <a href="/problems/list-ops.html">Other "List Ops" solutions.</a>
             <pre><code class="language-elixir">defmodule ListOps do
   # Please don't use any external modules (especially List or Enum) in your
   # implementation. The point of this exercise is to create these basic
@@ -140,7 +509,7 @@ end
   def map([head | tail], f), do: [f.(head) | map(tail, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter(l, f), do: for(x <- l, f.(x), do: x)
+  def filter(l, f), do: for x <- l, f.(x), do: x
 
   @type acc :: any
   @spec reduce(list, acc, (any, acc -> acc)) :: acc
@@ -158,8 +527,105 @@ end
 </code></pre>
         
 
+            <h3><a name="log-level">Log Level</a></h3>
+            <a href="/problems/log-level.html">Other "Log Level" solutions.</a>
+            <pre><code class="language-elixir">defmodule LogLevel do
+  def to_label(level, legacy?) do
+    cond do
+      level == 0 and not legacy? -> :trace
+      level == 1 -> :debug
+      level == 2 -> :info
+      level == 3 -> :warning
+      level == 4 -> :error
+      level == 5 and not legacy? ->  :fatal
+      true -> :unknown
+    end
+
+  end
+
+  def alert_recipient(level, legacy?) do
+    label = to_label(level, legacy?)
+    cond do
+      label == :error or label == :fatal -> :ops
+      legacy? and label == :unknown -> :dev1
+      label == :unknown -> :dev2
+      true -> false
+    end
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="name-badge">Name Badge</a></h3>
+            <a href="/problems/name-badge.html">Other "Name Badge" solutions.</a>
+            <pre><code class="language-elixir">defmodule NameBadge do
+  def print(id, name, department) do
+    d = if department, do: String.upcase(department), else: "OWNER"
+    if id do
+      "[#{id}] - #{name} - #{d}"
+    else
+      "#{name} - #{d}"
+    end
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="paint-by-number">Paint By Number</a></h3>
+            <a href="/problems/paint-by-number.html">Other "Paint By Number" solutions.</a>
+            <pre><code class="language-elixir">defmodule PaintByNumber do
+  def palette_bit_size(color_count) do
+    get_bit_size(color_count, 1)
+  end
+
+  defp get_bit_size(color_count, count) do
+    if Integer.pow(2, count) < color_count do
+      get_bit_size(color_count, count + 1)
+    else
+      count
+    end
+  end
+
+  def empty_picture() do
+    <<>>
+  end
+
+  def test_picture() do
+    <<0b00::2, 0b01::2, 0b10::2, 0b11::2>>
+  end
+
+  def prepend_pixel(picture, color_count, pixel_color_index) do
+    bit_count = palette_bit_size(color_count)
+
+    <<pixel_color_index::size(bit_count), picture::bitstring>>
+  end
+
+
+  def get_first_pixel(<<>>, _), do: nil
+  def get_first_pixel(picture, color_count) do
+    bit_count = palette_bit_size(color_count)
+    <<value::size(bit_count), _::bitstring>> = <<picture::bitstring>>
+
+    value
+  end
+
+  def drop_first_pixel(<<>>, _), do: ""
+  def drop_first_pixel(picture, color_count) do
+    bit_count = palette_bit_size(color_count)
+    <<_::size(bit_count), rest::bitstring>> = <<picture::bitstring>>
+
+    rest
+  end
+
+  def concat_pictures(picture1, picture2) do
+    <<picture1::bitstring, picture2::bitstring>>
+  end
+end
+</code></pre>
+        
+
             <h3><a name="rna-transcription">Rna Transcription</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
+            <a href="/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
             <pre><code class="language-elixir">defmodule RnaTranscription do
   @transcription %{
     ?G => ?C,
@@ -188,7 +654,7 @@ end
         
 
             <h3><a name="robot-simulator">Robot Simulator</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/robot-simulator.html">Other "Robot Simulator" solutions.</a>
+            <a href="/problems/robot-simulator.html">Other "Robot Simulator" solutions.</a>
             <pre><code class="language-elixir">defmodule RobotSimulator do
   @doc """
   Create a Robot Simulator given an initial direction and position.
@@ -269,7 +735,7 @@ end
         
 
             <h3><a name="roman-numerals">Roman Numerals</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/roman-numerals.html">Other "Roman Numerals" solutions.</a>
+            <a href="/problems/roman-numerals.html">Other "Roman Numerals" solutions.</a>
             <pre><code class="language-elixir">defmodule RomanNumerals do
   @numerals %{
     1 => "I",
@@ -313,8 +779,11 @@ end
         
 
             <h3><a name="rotational-cipher">Rotational Cipher</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/rotational-cipher.html">Other "Rotational Cipher" solutions.</a>
+            <a href="/problems/rotational-cipher.html">Other "Rotational Cipher" solutions.</a>
             <pre><code class="language-elixir">defmodule RotationalCipher do
+  @upper ?A..?Z
+  @lower ?a..?z
+
   @doc """
   Given a plaintext and amount to shift by, return a rotated string.
 
@@ -324,13 +793,145 @@ end
   """
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
+    text
+    |> String.to_charlist()
+    |> Enum.map(&rotate_char(&1, shift))
+    |> List.to_string()
+  end
+
+  defp rotate_char(char, shift) when char in @lower do
+    rotate_char(char, ?a, shift)
+  end
+
+  defp rotate_char(char, shift) when char in @upper do
+    rotate_char(char, ?A, shift)
+  end
+
+  defp rotate_char(char, _), do: char
+
+  defp rotate_char(char, base, shift) do
+    rem(char - base + shift, 26) + base
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="secrets">Secrets</a></h3>
+            <a href="/problems/secrets.html">Other "Secrets" solutions.</a>
+            <pre><code class="language-elixir">defmodule Secrets do
+  def secret_add(n) do
+    &(&1 + n)
+  end
+
+  def secret_subtract(n) do
+    &(&1 - n)
+  end
+
+  def secret_multiply(n) do
+    &(&1 * n)
+  end
+
+  def secret_divide(n) do
+    &div(&1, n)
+  end
+
+  def secret_and(secret) do
+    fn param -> Bitwise.band(param, secret) end
+  end
+
+  def secret_xor(secret) do
+    fn param -> Bitwise.bxor(param, secret) end
+  end
+
+  def secret_combine(fn1, fn2) do
+    &(&1
+      |> fn1.()
+      |> fn2.())
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="take-a-number">Take A Number</a></h3>
+            <a href="/problems/take-a-number.html">Other "Take A Number" solutions.</a>
+            <pre><code class="language-elixir">defmodule TakeANumber do
+  def start() do
+    spawn(&loop/0)
+  end
+
+  defp loop(state \\ 0) do
+    new_state = state
+
+    receive do
+      {:report_state, sender_pid} ->
+        send(sender_pid, state)
+        loop(state)
+
+      {:take_a_number, sender_pid} ->
+        new_state = new_state + 1
+        send(sender_pid, new_state)
+        loop(new_state)
+
+      :stop ->
+        nil
+
+      _ ->
+        loop(state)
+    end
+  end
+end
+</code></pre>
+        
+
+            <h3><a name="wine-cellar">Wine Cellar</a></h3>
+            <a href="/problems/wine-cellar.html">Other "Wine Cellar" solutions.</a>
+            <pre><code class="language-elixir">defmodule WineCellar do
+  def explain_colors do
+    [
+      white: "Fermented without skin contact.",
+      red: "Fermented with skin contact using dark-colored grapes.",
+      rose: "Fermented with some skin contact, but not enough to qualify as a red wine."
+    ]
+  end
+
+  def filter(cellar, color, opts \\ []) do
+    Keyword.get_values(cellar, color)
+    |> filter_by_year(opts[:year])
+    |> filter_by_country(opts[:country])
+  end
+
+  defp filter_by_year(wines, nil), do: wines
+  defp filter_by_country(wines, nil), do: wines
+
+  # The functions below do not need to be modified.
+
+  defp filter_by_year(wines, year)
+  defp filter_by_year([], _year), do: []
+
+  defp filter_by_year([{_, year, _} = wine | tail], year) do
+    [wine | filter_by_year(tail, year)]
+  end
+
+  defp filter_by_year([{_, _, _} | tail], year) do
+    filter_by_year(tail, year)
+  end
+
+  defp filter_by_country(wines, country)
+  defp filter_by_country([], _country), do: []
+
+  defp filter_by_country([{_, _, country} = wine | tail], country) do
+    [wine | filter_by_country(tail, country)]
+  end
+
+  defp filter_by_country([{_, _, _} | tail], country) do
+    filter_by_country(tail, country)
   end
 end
 </code></pre>
         
 
             <h3><a name="word-count">Word Count</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/word-count.html">Other "Word Count" solutions.</a>
+            <a href="/problems/word-count.html">Other "Word Count" solutions.</a>
             <pre><code class="language-elixir">defmodule WordCount do
   @doc """
   Count the number of words in the sentence.
@@ -364,6 +965,6 @@ end
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

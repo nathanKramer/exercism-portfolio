@@ -1,22 +1,22 @@
 
-        <html>
+        <html lang="en">
         <head>
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.css" />
-            <link rel="stylesheet" href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/style.css" />
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
         </head>
         <body>
             <div class="side-bar">
             <h2>Elm</h2>
             <p>Problems solved in elm.</p>
             <ul>
-              <li><a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/index.html">Home</a></li>
+              <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#accumulate">Accumulate</a></li><li><a href="#all-your-base">All Your Base</a></li><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#binary-search">Binary Search</a></li><li><a href="#bob">Bob</a></li><li><a href="#collatz-conjecture">Collatz Conjecture</a></li><li><a href="#etl">Etl</a></li><li><a href="#grade-school">Grade School</a></li><li><a href="#grains">Grains</a></li><li><a href="#hamming">Hamming</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#nucleotide-count">Nucleotide Count</a></li><li><a href="#pangram">Pangram</a></li><li><a href="#phone-number">Phone Number</a></li><li><a href="#raindrops">Raindrops</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#robot-simulator">Robot Simulator</a></li><li><a href="#scrabble-score">Scrabble Score</a></li><li><a href="#space-age">Space Age</a></li><li><a href="#strain">Strain</a></li><li><a href="#sum-of-multiples">Sum Of Multiples</a></li><li><a href="#triangle">Triangle</a></li><li><a href="#two-fer">Two Fer</a></li></ul>
+            <ul><li><a href="#accumulate">Accumulate</a></li><li><a href="#acronym">Acronym</a></li><li><a href="#all-your-base">All Your Base</a></li><li><a href="#allergies">Allergies</a></li><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#binary-search">Binary Search</a></li><li><a href="#bob">Bob</a></li><li><a href="#collatz-conjecture">Collatz Conjecture</a></li><li><a href="#difference-of-squares">Difference Of Squares</a></li><li><a href="#etl">Etl</a></li><li><a href="#gigasecond">Gigasecond</a></li><li><a href="#grade-school">Grade School</a></li><li><a href="#grains">Grains</a></li><li><a href="#hamming">Hamming</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#isogram">Isogram</a></li><li><a href="#leap">Leap</a></li><li><a href="#nucleotide-count">Nucleotide Count</a></li><li><a href="#pangram">Pangram</a></li><li><a href="#phone-number">Phone Number</a></li><li><a href="#raindrops">Raindrops</a></li><li><a href="#rna-transcription">Rna Transcription</a></li><li><a href="#robot-simulator">Robot Simulator</a></li><li><a href="#scrabble-score">Scrabble Score</a></li><li><a href="#space-age">Space Age</a></li><li><a href="#strain">Strain</a></li><li><a href="#sum-of-multiples">Sum Of Multiples</a></li><li><a href="#triangle">Triangle</a></li><li><a href="#two-fer">Two Fer</a></li></ul>
             </div>
             <div class="main">
             
             <h3><a name="accumulate">Accumulate</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/accumulate.html">Other "Accumulate" solutions.</a>
+            <a href="/problems/accumulate.html">Other "Accumulate" solutions.</a>
             <pre><code class="language-elm">module Accumulate exposing (accumulate)
 
 
@@ -26,19 +26,147 @@ accumulate =
 </code></pre>
         
 
+            <h3><a name="acronym">Acronym</a></h3>
+            <a href="/problems/acronym.html">Other "Acronym" solutions.</a>
+            <pre><code class="language-elm">module Acronym exposing (abbreviate)
+
+
+abbreviate : String -> String
+abbreviate =
+    String.replace "-" " "
+        >> String.words
+        >> List.map (String.slice 0 1)
+        >> String.concat
+        >> String.toUpper
+</code></pre>
+        
+
             <h3><a name="all-your-base">All Your Base</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/all-your-base.html">Other "All Your Base" solutions.</a>
+            <a href="/problems/all-your-base.html">Other "All Your Base" solutions.</a>
             <pre><code class="language-elm">module AllYourBase exposing (rebase)
 
 
 rebase : Int -> List Int -> Int -> Maybe (List Int)
 rebase inBase digits outBase =
-    Debug.todo "Please implement this function"
+    let
+        invalid =
+            List.isEmpty digits
+                || (inBase < 2)
+                || (outBase < 2)
+                || List.any (\d -> d >= inBase || d < 0) digits
+                || List.all ((==) 0) digits
+
+        totalValue =
+            readBase inBase digits
+    in
+    if invalid then
+        Nothing
+
+    else
+        Just (convertBase outBase totalValue)
+
+
+readBase : Int -> List Int -> Int
+readBase base digits =
+    let
+        accumulate digit ( counter, acc ) =
+            ( counter + 1, acc + (digit * (base ^ counter)) )
+    in
+    List.foldr accumulate ( 0, 0 ) digits |> Tuple.second
+
+
+convertBase : Int -> Int -> List Int
+convertBase base value =
+    case value of
+        0 ->
+            []
+
+        _ ->
+            convertBase base (value // base) ++ [ remainderBy base value ]
+</code></pre>
+        
+
+            <h3><a name="allergies">Allergies</a></h3>
+            <a href="/problems/allergies.html">Other "Allergies" solutions.</a>
+            <pre><code class="language-elm">module Allergies exposing (Allergy(..), isAllergicTo, toList)
+
+import Bitwise as B
+
+
+type Allergy
+    = Eggs
+    | Peanuts
+    | Shellfish
+    | Strawberries
+    | Tomatoes
+    | Chocolate
+    | Pollen
+    | Cats
+
+
+allergies : List Allergy
+allergies =
+    [ Eggs
+    , Peanuts
+    , Shellfish
+    , Strawberries
+    , Tomatoes
+    , Chocolate
+    , Pollen
+    , Cats
+    ]
+
+
+allergyValue : Allergy -> Int
+allergyValue allergy =
+    case allergy of
+        Eggs ->
+            1
+
+        Peanuts ->
+            2
+
+        Shellfish ->
+            4
+
+        Strawberries ->
+            8
+
+        Tomatoes ->
+            16
+
+        Chocolate ->
+            32
+
+        Pollen ->
+            64
+
+        Cats ->
+            128
+
+
+isAllergicTo : Allergy -> Int -> Bool
+isAllergicTo allergy score =
+    let
+        allergyTest =
+            B.and (allergyValue allergy) score
+    in
+    case allergyTest of
+        0 ->
+            False
+
+        _ ->
+            True
+
+
+toList : Int -> List Allergy
+toList score =
+    List.filter (\allergy -> isAllergicTo allergy score) allergies
 </code></pre>
         
 
             <h3><a name="armstrong-numbers">Armstrong Numbers</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
+            <a href="/problems/armstrong-numbers.html">Other "Armstrong Numbers" solutions.</a>
             <pre><code class="language-elm">module ArmstrongNumbers exposing (isArmstrongNumber)
 
 
@@ -61,7 +189,7 @@ isArmstrongNumber num =
         
 
             <h3><a name="binary-search">Binary Search</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/binary-search.html">Other "Binary Search" solutions.</a>
+            <a href="/problems/binary-search.html">Other "Binary Search" solutions.</a>
             <pre><code class="language-elm">module BinarySearch exposing (find)
 
 import Array exposing (Array)
@@ -101,7 +229,7 @@ find target xs =
         
 
             <h3><a name="bob">Bob</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/bob.html">Other "Bob" solutions.</a>
+            <a href="/problems/bob.html">Other "Bob" solutions.</a>
             <pre><code class="language-elm">module Bob exposing (hey)
 
 
@@ -175,7 +303,7 @@ nonEmpty string =
         
 
             <h3><a name="collatz-conjecture">Collatz Conjecture</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
+            <a href="/problems/collatz-conjecture.html">Other "Collatz Conjecture" solutions.</a>
             <pre><code class="language-elm">module CollatzConjecture exposing (collatz)
 
 
@@ -206,8 +334,43 @@ collatz start =
 </code></pre>
         
 
+            <h3><a name="difference-of-squares">Difference Of Squares</a></h3>
+            <a href="/problems/difference-of-squares.html">Other "Difference Of Squares" solutions.</a>
+            <pre><code class="language-elm">module DifferenceOfSquares exposing (difference, squareOfSum, sumOfSquares)
+
+import List exposing (foldl, map, range)
+
+
+sum : List Int -> Int
+sum =
+    foldl (+) 0
+
+
+squared : Int -> Int
+squared x =
+    x ^ 2
+
+
+squareOfSum : Int -> Int
+squareOfSum n =
+    sum (range 1 n) ^ 2
+
+
+sumOfSquares : Int -> Int
+sumOfSquares n =
+    range 1 n
+        |> map squared
+        |> sum
+
+
+difference : Int -> Int
+difference n =
+    squareOfSum n - sumOfSquares n
+</code></pre>
+        
+
             <h3><a name="etl">Etl</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/etl.html">Other "Etl" solutions.</a>
+            <a href="/problems/etl.html">Other "Etl" solutions.</a>
             <pre><code class="language-elm">module Etl exposing (transform)
 
 import Dict exposing (Dict)
@@ -215,19 +378,28 @@ import Dict exposing (Dict)
 
 transform : Dict Int (List String) -> Dict String Int
 transform input =
-    let
-        convertScoreEntry ( score, letters ) =
-            letters
-                |> List.map (\l -> ( String.toLower l, score ))
-    in
     Dict.toList input
-        |> List.concatMap convertScoreEntry
+        |> List.concatMap (\( score, letters ) -> List.map (\l -> ( String.toLower l, score )) letters)
         |> Dict.fromList
 </code></pre>
         
 
+            <h3><a name="gigasecond">Gigasecond</a></h3>
+            <a href="/problems/gigasecond.html">Other "Gigasecond" solutions.</a>
+            <pre><code class="language-elm">module Gigasecond exposing (add)
+
+import Time exposing (millisToPosix, posixToMillis)
+
+
+add : Time.Posix -> Time.Posix
+add timestamp =
+    (posixToMillis timestamp + 10 ^ 12)
+        |> millisToPosix
+</code></pre>
+        
+
             <h3><a name="grade-school">Grade School</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/grade-school.html">Other "Grade School" solutions.</a>
+            <a href="/problems/grade-school.html">Other "Grade School" solutions.</a>
             <pre><code class="language-elm">module GradeSchool exposing (addStudent, allStudents, empty, studentsInGrade)
 
 import Dict exposing (Dict)
@@ -284,7 +456,7 @@ allStudents school =
         
 
             <h3><a name="grains">Grains</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/grains.html">Other "Grains" solutions.</a>
+            <a href="/problems/grains.html">Other "Grains" solutions.</a>
             <pre><code class="language-elm">module Grains exposing (square)
 
 
@@ -299,7 +471,7 @@ square n =
         
 
             <h3><a name="hamming">Hamming</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hamming.html">Other "Hamming" solutions.</a>
+            <a href="/problems/hamming.html">Other "Hamming" solutions.</a>
             <pre><code class="language-elm">module Hamming exposing (distance)
 
 
@@ -321,7 +493,7 @@ calculateDistance left right =
         
 
             <h3><a name="hello-world">Hello World</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/hello-world.html">Other "Hello World" solutions.</a>
+            <a href="/problems/hello-world.html">Other "Hello World" solutions.</a>
             <pre><code class="language-elm">module HelloWorld exposing (helloWorld)
 
 
@@ -331,8 +503,52 @@ helloWorld =
 </code></pre>
         
 
+            <h3><a name="isogram">Isogram</a></h3>
+            <a href="/problems/isogram.html">Other "Isogram" solutions.</a>
+            <pre><code class="language-elm">module Isogram exposing (isIsogram)
+
+import Set
+
+
+isIsogram : String -> Bool
+isIsogram sentence =
+    let
+        letters =
+            sentence
+                |> String.toList
+                |> List.map Char.toLower
+                |> List.filter Char.isAlpha
+    in
+    List.length letters == Set.size (Set.fromList letters)
+</code></pre>
+        
+
+            <h3><a name="leap">Leap</a></h3>
+            <a href="/problems/leap.html">Other "Leap" solutions.</a>
+            <pre><code class="language-elm">module Leap exposing (isLeapYear)
+
+
+divisbleBy : Int -> Int -> Bool
+divisbleBy div x =
+    modBy div x == 0
+
+
+isLeapYear : Int -> Bool
+isLeapYear year =
+    List.all
+        (\fn -> fn year)
+        [ divisbleBy 4
+        , fOr (divisbleBy 100 >> not) (divisbleBy 400)
+        ]
+
+
+fOr f g x =
+    f x || g x
+</code></pre>
+        
+
             <h3><a name="nucleotide-count">Nucleotide Count</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/nucleotide-count.html">Other "Nucleotide Count" solutions.</a>
+            <a href="/problems/nucleotide-count.html">Other "Nucleotide Count" solutions.</a>
             <pre><code class="language-elm">module NucleotideCount exposing (nucleotideCounts)
 
 
@@ -362,43 +578,43 @@ aggregateGroups ( k, instances ) acc =
     in
     case k of
         'a' ->
-            { acc | a = acc.a }
+            { acc | a = acc.a + count }
 
         't' ->
-            { acc | t = acc.t }
+            { acc | t = acc.t + count }
 
         'c' ->
-            { acc | c = acc.c }
+            { acc | c = acc.c + count }
 
         'g' ->
-            { acc | g = acc.g }
+            { acc | g = acc.g + count }
 
         _ ->
             acc
 
 
 group : List a -> List ( a, List a )
-group list =
-    let
-        helper : List a -> List ( a, List a ) -> List ( a, List a )
-        helper scattered gathered =
-            case scattered of
+group items =
+    List.foldr
+        (\x acc ->
+            case acc of
                 [] ->
-                    List.reverse gathered
+                    [ ( x, [ x ] ) ]
 
-                toGather :: population ->
-                    let
-                        ( gathering, remaining ) =
-                            List.partition ((==) toGather) population
-                    in
-                    helper remaining <| ( toGather, gathering ) :: gathered
-    in
-    helper list []
+                ( y, restOfGroup ) :: groups ->
+                    if x == y then
+                        ( x, y :: restOfGroup ) :: groups
+
+                    else
+                        ( x, [ x ] ) :: acc
+        )
+        []
+        items
 </code></pre>
         
 
             <h3><a name="pangram">Pangram</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/pangram.html">Other "Pangram" solutions.</a>
+            <a href="/problems/pangram.html">Other "Pangram" solutions.</a>
             <pre><code class="language-elm">module Pangram exposing (isPangram)
 
 
@@ -421,7 +637,7 @@ isPangram sentence =
         
 
             <h3><a name="phone-number">Phone Number</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/phone-number.html">Other "Phone Number" solutions.</a>
+            <a href="/problems/phone-number.html">Other "Phone Number" solutions.</a>
             <pre><code class="language-elm">module PhoneNumber exposing (getNumber)
 
 
@@ -486,7 +702,7 @@ getNumber phoneNumber =
         
 
             <h3><a name="raindrops">Raindrops</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/raindrops.html">Other "Raindrops" solutions.</a>
+            <a href="/problems/raindrops.html">Other "Raindrops" solutions.</a>
             <pre><code class="language-elm">module Raindrops exposing (raindrops)
 
 
@@ -543,7 +759,7 @@ nonEmpty string =
         
 
             <h3><a name="rna-transcription">Rna Transcription</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
+            <a href="/problems/rna-transcription.html">Other "Rna Transcription" solutions.</a>
             <pre><code class="language-elm">module RNATranscription exposing (toRNA)
 
 
@@ -577,7 +793,7 @@ toRNA dna =
         
 
             <h3><a name="robot-simulator">Robot Simulator</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/robot-simulator.html">Other "Robot Simulator" solutions.</a>
+            <a href="/problems/robot-simulator.html">Other "Robot Simulator" solutions.</a>
             <pre><code class="language-elm">module RobotSimulator exposing
     ( Bearing(..)
     , Robot
@@ -694,7 +910,7 @@ simulate directions robot =
         
 
             <h3><a name="scrabble-score">Scrabble Score</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/scrabble-score.html">Other "Scrabble Score" solutions.</a>
+            <a href="/problems/scrabble-score.html">Other "Scrabble Score" solutions.</a>
             <pre><code class="language-elm">module ScrabbleScore exposing (scoreWord)
 
 import Dict exposing (Dict)
@@ -742,7 +958,7 @@ scoreWord =
         
 
             <h3><a name="space-age">Space Age</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/space-age.html">Other "Space Age" solutions.</a>
+            <a href="/problems/space-age.html">Other "Space Age" solutions.</a>
             <pre><code class="language-elm">module SpaceAge exposing (Planet(..), ageOn)
 
 
@@ -800,7 +1016,7 @@ ageOn planet seconds =
         
 
             <h3><a name="strain">Strain</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/strain.html">Other "Strain" solutions.</a>
+            <a href="/problems/strain.html">Other "Strain" solutions.</a>
             <pre><code class="language-elm">module Strain exposing (discard, keep)
 
 
@@ -833,7 +1049,7 @@ discard predicate list =
         
 
             <h3><a name="sum-of-multiples">Sum Of Multiples</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/sum-of-multiples.html">Other "Sum Of Multiples" solutions.</a>
+            <a href="/problems/sum-of-multiples.html">Other "Sum Of Multiples" solutions.</a>
             <pre><code class="language-elm">module SumOfMultiples exposing (sumOfMultiples)
 
 
@@ -853,7 +1069,7 @@ sumOfMultiples divisors limit =
         
 
             <h3><a name="triangle">Triangle</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/triangle.html">Other "Triangle" solutions.</a>
+            <a href="/problems/triangle.html">Other "Triangle" solutions.</a>
             <pre><code class="language-elm">module Triangle exposing (Triangle(..), triangleKind)
 
 
@@ -899,7 +1115,7 @@ triangleKind x y z =
         
 
             <h3><a name="two-fer">Two Fer</a></h3>
-            <a href="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/problems/two-fer.html">Other "Two Fer" solutions.</a>
+            <a href="/problems/two-fer.html">Other "Two Fer" solutions.</a>
             <pre><code class="language-elm">module TwoFer exposing (twoFer)
 
 
@@ -910,6 +1126,6 @@ twoFer name =
         
             </div>
         </body>
-        <script src="/Users/nathankramer/Projects/nathanKramer/exercism-portfolio/assets/prism.js"></script>
+        <script src="/assets/prism.js"></script>
         </html>
         

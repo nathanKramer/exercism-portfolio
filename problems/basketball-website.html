@@ -1,0 +1,37 @@
+
+        <html lang="en">
+        <head>
+            <link rel="stylesheet" href="/assets/prism.css" />
+            <link rel="stylesheet" href="/assets/style.css" />
+        </head>
+        <body>
+            <div class="side-bar">
+            <h2>Basketball Website</h2>
+            <p>Solutions to basketball-website in various languages.</p>
+            <ul>
+              <li><a href="/index.html">Home</a></li>
+            </ul>
+            <ul><li><a href="#elixir">Elixir</a></li></ul>
+            </div>
+            <div class="main">
+            
+            <h3><a name="elixir">Elixir</a></h3>
+            <a href="/languages/elixir.html">Other Elixir solutions.</a>
+            <pre><code class="language-elixir">defmodule BasketballWebsite do
+  def extract_from_path(data, path) do
+    path
+    |> String.split(".")
+    |> Enum.reduce(data, fn key, acc -> acc[key] end)
+  end
+
+  def get_in_path(data, path) do
+    get_in(data, String.split(path, "."))
+  end
+end
+</code></pre>
+        
+            </div>
+        </body>
+        <script src="/assets/prism.js"></script>
+        </html>
+        

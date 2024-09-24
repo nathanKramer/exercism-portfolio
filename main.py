@@ -238,10 +238,6 @@ def writePortfolioToFile(root, portfolio):
         if child is None:
             continue
         if type(child) is dict:
-            if not os.path.isdir(workingDir):
-                print(f'Creating: {workingDir}')
-                os.mkdir(workingDir)
-            print(f'Writing {key}')
             writePortfolioToFile(workingDir, child)
         else:
             with open(f'{workingDir}.html', 'w+') as solutionPage:
@@ -270,11 +266,17 @@ def main():
         'languages': {lang: languagePage(os.getcwd(), lang, problems) for lang, problems in iter(problems_by_lang.items())},
         'problems': {problem: problemPage(os.getcwd(), problem, languages) for problem, languages in iter(langs_by_problem.items())}
     }
-    with open(f'index.html', 'w+') as indexPage:
-        print(f'Writing: index.html')
+
+    os.makedirs("pages", exist_ok=True)
+    os.makedirs("pages/problems", exist_ok=True)
+    os.makedirs("pages/languages", exist_ok=True)
+
+    with open(f'pages/exercism.html', 'w+') as indexPage:
+        print(f'Writing: exercism.html')
         indexPage.write(renderIndexPage(os.getcwd(), portfolio))
+
     writePortfolioToFile(
-        os.getcwd(),
+        f"{os.getcwd()}/pages",
         portfolio
     )
 

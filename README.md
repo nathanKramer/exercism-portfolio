@@ -12,3 +12,11 @@ Not generalised so if you want to use this you will need to change some hardcode
 ## View by problem
 
 ![image](https://user-images.githubusercontent.com/4732403/110627048-9a433b00-81f5-11eb-8c57-0f174cbb87d5.png)
+
+## Building
+
+Just run the following script:
+
+```bash
+bin/run
+```

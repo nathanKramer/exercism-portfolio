@@ -18,9 +18,6 @@
             <h3><a name="elixir">Elixir</a></h3>
             <a href="/languages/elixir.html">Other Elixir solutions.</a>
             <pre><code class="language-elixir">defmodule RotationalCipher do
-  @upper ?A..?Z
-  @lower ?a..?z
-
   @doc """
   Given a plaintext and amount to shift by, return a rotated string.
 
@@ -30,24 +27,6 @@
   """
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
-    text
-    |> String.to_charlist()
-    |> Enum.map(&rotate_char(&1, shift))
-    |> List.to_string()
-  end
-
-  defp rotate_char(char, shift) when char in @lower do
-    rotate_char(char, ?a, shift)
-  end
-
-  defp rotate_char(char, shift) when char in @upper do
-    rotate_char(char, ?A, shift)
-  end
-
-  defp rotate_char(char, _), do: char
-
-  defp rotate_char(char, base, shift) do
-    rem(char - base + shift, 26) + base
   end
 end
 </code></pre>

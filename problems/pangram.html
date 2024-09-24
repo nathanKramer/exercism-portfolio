@@ -17,14 +17,10 @@
             
             <h3><a name="nim">Nim</a></h3>
             <a href="/languages/nim.html">Other Nim solutions.</a>
-            <pre><code class="language-nim">import unicode, sequtils
+            <pre><code class="language-nim">import sequtils, strutils
 
-const alphabet = {'A'..'Z'}
-proc isPangram*(str: string): bool =
-  all(
-    toSeq(alphabet),
-    proc(c: system.char): bool = c in str.toUpper
-  )
+func isPangram*(phrase: string): bool =
+  {'a'..'z'}.allIt it.in(phrase.toLower)
 </code></pre>
         
 

@@ -22,41 +22,7 @@
 
 rebase : Int -> List Int -> Int -> Maybe (List Int)
 rebase inBase digits outBase =
-    let
-        invalid =
-            List.isEmpty digits
-                || (inBase < 2)
-                || (outBase < 2)
-                || List.any (\d -> d >= inBase || d < 0) digits
-                || List.all ((==) 0) digits
-
-        totalValue =
-            readBase inBase digits
-    in
-    if invalid then
-        Nothing
-
-    else
-        Just (convertBase outBase totalValue)
-
-
-readBase : Int -> List Int -> Int
-readBase base digits =
-    let
-        accumulate digit ( counter, acc ) =
-            ( counter + 1, acc + (digit * (base ^ counter)) )
-    in
-    List.foldr accumulate ( 0, 0 ) digits |> Tuple.second
-
-
-convertBase : Int -> Int -> List Int
-convertBase base value =
-    case value of
-        0 ->
-            []
-
-        _ ->
-            convertBase base (value // base) ++ [ remainderBy base value ]
+    Debug.todo "Please implement this function"
 </code></pre>
         
             </div>

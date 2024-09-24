@@ -509,7 +509,7 @@ end
   def map([head | tail], f), do: [f.(head) | map(tail, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter(l, f), do: for x <- l, f.(x), do: x
+  def filter(l, f), do: for(x <- l, f.(x), do: x)
 
   @type acc :: any
   @spec reduce(list, acc, (any, acc -> acc)) :: acc
@@ -781,9 +781,6 @@ end
             <h3><a name="rotational-cipher">Rotational Cipher</a></h3>
             <a href="/problems/rotational-cipher.html">Other "Rotational Cipher" solutions.</a>
             <pre><code class="language-elixir">defmodule RotationalCipher do
-  @upper ?A..?Z
-  @lower ?a..?z
-
   @doc """
   Given a plaintext and amount to shift by, return a rotated string.
 
@@ -793,24 +790,6 @@ end
   """
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
-    text
-    |> String.to_charlist()
-    |> Enum.map(&rotate_char(&1, shift))
-    |> List.to_string()
-  end
-
-  defp rotate_char(char, shift) when char in @lower do
-    rotate_char(char, ?a, shift)
-  end
-
-  defp rotate_char(char, shift) when char in @upper do
-    rotate_char(char, ?A, shift)
-  end
-
-  defp rotate_char(char, _), do: char
-
-  defp rotate_char(char, base, shift) do
-    rem(char - base + shift, 26) + base
   end
 end
 </code></pre>

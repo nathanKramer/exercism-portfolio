@@ -25,13 +25,13 @@
 
 (defn is-yelling [s]
   (let [alphas (filter #(Character/isLetter %) s)]
-    (and (not-empty alphas)
-         (every?
-          #(Character/isUpperCase %)
-          alphas))))
+    (and
+     (not-empty alphas)
+     (every?
+      #(Character/isUpperCase %)
+      alphas))))
 
 (defn response-for
-  "Does Bob stuff"
   [input]
   (let [s (trim input)]
     (cond

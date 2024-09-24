@@ -38,7 +38,7 @@
   def map([head | tail], f), do: [f.(head) | map(tail, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter(l, f), do: for x <- l, f.(x), do: x
+  def filter(l, f), do: for(x <- l, f.(x), do: x)
 
   @type acc :: any
   @spec reduce(list, acc, (any, acc -> acc)) :: acc

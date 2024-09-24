@@ -114,13 +114,13 @@
 
 (defn is-yelling [s]
   (let [alphas (filter #(Character/isLetter %) s)]
-    (and (not-empty alphas)
-         (every?
-          #(Character/isUpperCase %)
-          alphas))))
+    (and
+     (not-empty alphas)
+     (every?
+      #(Character/isUpperCase %)
+      alphas))))
 
 (defn response-for
-  "Does Bob stuff"
   [input]
   (let [s (trim input)]
     (cond
@@ -222,6 +222,7 @@
     (and valid-input? (verify-isbn parsed))))
 
 
+(isbn? "3-598-21507-X")
 </code></pre>
         
 
@@ -430,10 +431,6 @@
     (fn [[val _]] (> val num))
     magnitudes)))
 
-(next-magnitude 5234)
-;; => [1000 "thousand"]
-
-
 (defn- say-compound-word
   [num]
   (let [small (rem num 10)
@@ -453,7 +450,7 @@
                 filtered-components (filter
                                      not-empty
                                      components)]
-            (str (join " " filtered-components)))))
+            (join " " filtered-components))))
 
 
 ;;; EXPORTS
@@ -467,21 +464,6 @@
   (if (= num 0)
     "zero"
     (say num)))
-
-(number 0)
-(number 1035053)
-;; => Syntax error compiling at (say.clj:80:1).
-;;    Unable to resolve symbol: number in this context
-
-;; => "one million thirty-five thousand fifty-three"
-
-;; => "zero"
-
-;; => Syntax error compiling at (say.clj:79:1).
-;;    Unable to resolve symbol: number in this context
-(number 09238420394)
-;; => Syntax error reading source at (REPL:94:20).
-;;    Invalid number: 09238420394
 </code></pre>
         
 
@@ -512,10 +494,10 @@
             <h3><a name="word-count">Word Count</a></h3>
             <a href="/problems/word-count.html">Other "Word Count" solutions.</a>
             <pre><code class="language-clojure">(ns word-count
-  (:require [clojure.string :refer [split]]))
+  (:require [clojure.string :refer [split lower-case]]))
 
 (defn word-count [s]
-  (let [words (split s #" ")
+  (let [words (split (lower-case s) #" ")
         grouped-words (group-by identity words)]
     (zipmap
      (keys grouped-words)

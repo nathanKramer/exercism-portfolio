@@ -11,7 +11,7 @@
             <ul>
               <li><a href="/index.html">Home</a></li>
             </ul>
-            <ul><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#darts">Darts</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#resistor-color">Resistor Color</a></li><li><a href="#resistor-color-duo">Resistor Color Duo</a></li></ul>
+            <ul><li><a href="#armstrong-numbers">Armstrong Numbers</a></li><li><a href="#darts">Darts</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#linked-list">Linked List</a></li><li><a href="#resistor-color">Resistor Color</a></li><li><a href="#resistor-color-duo">Resistor Color Duo</a></li><li><a href="#resistor-color-trio">Resistor Color Trio</a></li></ul>
             </div>
             <div class="main">
             
@@ -81,6 +81,31 @@ const char *hello(void)
 </code></pre>
         
 
+            <h3><a name="linked-list">Linked List</a></h3>
+            <a href="/problems/linked-list.html">Other "Linked List" solutions.</a>
+            <pre><code class="language-c">#include "linked_list.h"
+
+typedef struct list_item
+{
+   struct list_item *next;
+   struct list_item *previous;
+   ll_data_t data;
+} list_item_t;
+
+list_item_t **new_list()
+{
+   list_item_t *list =
+       &(list_item_t){.next = 0, .previous = 0, .data = 0};
+   return list;
+}
+
+bool is_list_empty(struct list_item **list)
+{
+   return !(list && *list);
+}
+</code></pre>
+        
+
             <h3><a name="resistor-color">Resistor Color</a></h3>
             <a href="/problems/resistor-color.html">Other "Resistor Color" solutions.</a>
             <pre><code class="language-c">#include "resistor_color.h"
@@ -111,6 +136,12 @@ int color_code(resistor_band_t colors[])
 {
    return colors[0] * 10 + colors[1];
 }
+</code></pre>
+        
+
+            <h3><a name="resistor-color-trio">Resistor Color Trio</a></h3>
+            <a href="/problems/resistor-color-trio.html">Other "Resistor Color Trio" solutions.</a>
+            <pre><code class="language-c">#include "resistor_color_trio.h"
 </code></pre>
         
             </div>

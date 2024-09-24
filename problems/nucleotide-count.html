@@ -46,38 +46,38 @@ aggregateGroups ( k, instances ) acc =
     in
     case k of
         'a' ->
-            { acc | a = acc.a + count }
+            { acc | a = acc.a }
 
         't' ->
-            { acc | t = acc.t + count }
+            { acc | t = acc.t }
 
         'c' ->
-            { acc | c = acc.c + count }
+            { acc | c = acc.c }
 
         'g' ->
-            { acc | g = acc.g + count }
+            { acc | g = acc.g }
 
         _ ->
             acc
 
 
 group : List a -> List ( a, List a )
-group items =
-    List.foldr
-        (\x acc ->
-            case acc of
+group list =
+    let
+        helper : List a -> List ( a, List a ) -> List ( a, List a )
+        helper scattered gathered =
+            case scattered of
                 [] ->
-                    [ ( x, [ x ] ) ]
+                    List.reverse gathered
 
-                ( y, restOfGroup ) :: groups ->
-                    if x == y then
-                        ( x, y :: restOfGroup ) :: groups
-
-                    else
-                        ( x, [ x ] ) :: acc
-        )
-        []
-        items
+                toGather :: population ->
+                    let
+                        ( gathering, remaining ) =
+                            List.partition ((==) toGather) population
+                    in
+                    helper remaining <| ( toGather, gathering ) :: gathered
+    in
+    helper list []
 </code></pre>
         
             </div>

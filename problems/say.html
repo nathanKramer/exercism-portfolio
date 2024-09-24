@@ -61,10 +61,6 @@
     (fn [[val _]] (> val num))
     magnitudes)))
 
-(next-magnitude 5234)
-;; => [1000 "thousand"]
-
-
 (defn- say-compound-word
   [num]
   (let [small (rem num 10)
@@ -84,7 +80,7 @@
                 filtered-components (filter
                                      not-empty
                                      components)]
-            (str (join " " filtered-components)))))
+            (join " " filtered-components))))
 
 
 ;;; EXPORTS
@@ -98,21 +94,6 @@
   (if (= num 0)
     "zero"
     (say num)))
-
-(number 0)
-(number 1035053)
-;; => Syntax error compiling at (say.clj:80:1).
-;;    Unable to resolve symbol: number in this context
-
-;; => "one million thirty-five thousand fifty-three"
-
-;; => "zero"
-
-;; => Syntax error compiling at (say.clj:79:1).
-;;    Unable to resolve symbol: number in this context
-(number 09238420394)
-;; => Syntax error reading source at (REPL:94:20).
-;;    Invalid number: 09238420394
 </code></pre>
         
             </div>
